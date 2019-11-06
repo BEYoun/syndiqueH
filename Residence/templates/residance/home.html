@@ -1,0 +1,313 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/datatables.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/charts/apexcharts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/dragula.min.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/dashboard-ecommerce.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/extensions/drag-and-drop.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "residance/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern content-left-sidebar email-application navbar-floating footer-static "
+data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar"
+{% endblock %}
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+
+    <!-- BEGIN: Header-->
+    {% include "residance/components/Header.html" %}
+    <!-- END: Header-->
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Accueil</h2>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Accueil
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content-body">
+            
+
+            <!-- Overlay Image and Chat Section Starts -->
+            <section id="overlay-image-chat-cards">
+
+                <div class="row">
+                <!-- Draggable cards section start -->
+            <div class="col-6">
+                <h1>Paiements</h1>
+                <p>Visualiser l'état des paiments de vos appartements</p>
+                <section id="draggable-cards">
+                    <div class="row" id="card-drag-area">
+                        {% for appart in apprtements %}
+                        <div class="col-xl-6 col-md-6 col-sm-12">
+                            <div class="card">
+                                <div class="card-header">
+                                {% if appart.user %}
+                                
+                                    <img src="{% static 'house green.svg' %}" alt="un triangle aux trois côtés égaux"
+                                        height="50px" width="50px" />
+                                {% else %}
+                                <img src="{% static 'house red.svg' %}" alt="un triangle aux trois côtés égaux"
+                                        height="50px" width="50px" />
+                                {% endif %}
+                                    <h4 class="card-title">
+                                        {{appart.nom}}
+                                    </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                        {% if appart.user %}
+                                        
+                                            Proprietaire : {{appart.user.first_name}} {{appart.user.last_name}}
+                                        {% else %}
+                                        Proprietaire : <code>pas de Proprietaire</code>
+                                        {% endif %}
+                                        </p>
+                                        <div class="modal-info mr-1 mb-1 d-inline-block">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#info{{appart.id}}">
+                                                        plus d'information
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade text-left" id="info{{appart.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-info white">
+                                                                    <h5 class="modal-title" id="myModalLabel130">information sur l'appartement {{appart.nom}}</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{appart.nom}}
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Fermer</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+            <!-- // Draggable cards section end -->
+                    <div class="col-lg-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Assemblees</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <ul class="activity-timeline timeline-right list-unstyled">
+                                        <li>
+                                            <div class="timeline-icon bg-primary">
+                                                <i class="feather icon-plus font-medium-2"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold">Assemblées général</p>
+
+                                            </div>
+                                            <small class="">dans 3 jours</small>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-icon bg-warning">
+                                                <i class="feather icon-alert-circle font-medium-2"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold">Assemblées Extraordinaire</p>
+                                            </div>
+                                            <small class="">dans 1 jours</small>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-icon bg-success">
+                                                <i class="feather icon-check font-medium-2"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold">Assemblées ordinaire</p>
+
+                                            </div>
+                                            <small class="">il y a 2 jours</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Sondage sur la "<code>couleur de la facade?</code>"</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div id="donut-chart" class="mx-auto"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <ul>
+                                    <li><code>series-1</code> equivaut a : <code>bleu</code></li>
+                                    <li><code>series-2</code> equivaut a : <code>rouge</code></li>
+                                    <li><code>series-3</code> equivaut a : <code>vert</code></li>
+                                    <li><code>series-4</code> equivaut a : <code>orange</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+
+                        <!-- Column selectors with Export Options and print table -->
+                        <section id="column-selectors">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Detail des paiments de vos residants</h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body card-dashboard">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped dataex-html5-selectors">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nom et prénom</th>
+                                                                <th>Résidance</th>
+                                                                <th>Mottant payé</th>
+                                                                <th>Date</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {% for residant in residants %}
+                                                            <td>younes</td>
+                                                            <td>younes</td>
+                                                            <td>younes</td>
+                                                            <td>younes</td>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>Nom et prénom</th>
+                                                                <th>Résidance</th>
+                                                                <th>Mottant payé</th>
+                                                                <th>Date</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Column selectors with Export Options and print table -->
+
+                    </div>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/editors/quill/katex.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/editors/quill/highlight.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/editors/quill/quill.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/charts/apexcharts.min.js' %}"></script>
+
+<script src="{% static 'app-assets/vendors/js/tables/datatable/pdfmake.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/vfs_fonts.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/datatables.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/datatables.buttons.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/buttons.html5.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/buttons.print.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/extensions/dragula.min.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/pages/app-chat.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/charts/chart-apex.js' %}"></script>
+
+<script src="{% static 'app-assets/js/scripts/datatables/datatable.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/extensions/drag-drop.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/modal/components-modal.js' %}"></script>
+{% endblock %}
+
+
+<!-- END: Page JS-->

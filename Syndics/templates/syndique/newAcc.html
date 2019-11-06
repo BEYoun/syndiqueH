@@ -1,0 +1,154 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/forms/validation/form-validation.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "syndique/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+    {% include "syndique/components/Header.html" %}
+    
+    <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-left mb-0">Creation Compte Habitant</h2>
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">Creation Habitant
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                    <div class="form-group breadcrum-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
+                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- Simple Validation start -->
+                <section class="simple-validation">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Simple Form Validation</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p class="mt-1">Add <code>novalidate</code> attribute to form tag and <code>required</code> attribute to input tag.</p>
+                                        <form class="form-horizontal" novalidate method="POST" action="{% url 'syndique:newHabitant' %}">
+                                        {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <input type="text" name="name" class="form-control" placeholder="First Name" required data-validation-required-message="This First Name field is required">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <input type="email" name="email" class="form-control" placeholder="Email" required data-validation-required-message="This Email field is required">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Input Validation end -->
+                {% if messages %}
+                                                    <ul class="messages">
+                                                        {% for message in messages %}
+                                                        <li class="{{ message.tags }}">{{ message }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %}
+            </div>
+        </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/forms/validation/jqBootstrapValidation.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/forms/validation/form-validation.js' %}"></script>
+{% endblock %}
+<!-- END: Page JS-->

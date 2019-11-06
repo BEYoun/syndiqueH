@@ -1,0 +1,188 @@
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+{% load static %}
+	<head>
+	    <!-- Mobile Specific Meta -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <!-- Favicon-->
+	    <link rel="shortcut icon" href="img/fav.png">
+	    <!-- Author Meta -->
+	    <meta name="author" content="colorlib">
+	    <!-- Meta Description -->
+	    <meta name="description" content="">
+	    <!-- Meta Keyword -->
+	    <meta name="keywords" content="">
+	    <!-- meta character set -->
+	    <meta charset="UTF-8">
+	    <!-- Site Title -->
+	    <title>Personal</title>
+
+	    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+	    <!--
+			CSS
+			============================================= -->
+	    <link rel="stylesheet" href="{% static 'accueil/css/linearicons.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/font-awesome.min.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/bootstrap.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/magnific-popup.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/jquery-ui.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/nice-select.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/animate.min.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/owl.carousel.css' %}">
+	    <link rel="stylesheet" href="{% static 'accueil/css/main.css' %}">
+	    
+		<link rel="stylesheet" href="{% static 'accueil/css/perso.css' %}">
+	</head>
+
+	<body>
+	    {% include "accueil/components/header.html" %}
+	    <!-- start banner Area -->
+	    <section class="about-banner">
+	        <div class="container">
+	            <div class="row d-flex align-items-center justify-content-center">
+	                <div class="about-content col-lg-12">
+	                    <h1 class="text-white">
+	                        A propos
+	                    </h1>
+	                    <p class="text-white link-nav"><a href="{% url 'accueil:home' %}">Accueil</a> <span
+	                            class="lnr lnr-arrow-right"></span> <a href="{% url 'accueil:about' %}"> A propos</a></p>
+	                </div>
+	            </div>
+	        </div>
+	    </section>
+	    <!-- End banner Area -->
+
+	    <!-- Start home-about Area -->
+	    <section class="home-about-area section-gap">
+	        <div class="container">
+	            <div class="row align-items-center justify-content-between">
+	                <div class="col-lg-6 col-md-6 home-about-left">
+	                    <img class="img-fluid" src="{% static 'accueil/img/about-img.png' %}" alt="">
+	                </div>
+	                <div class="col-lg-5 col-md-6 home-about-right">
+	                    <h1 class="text-uppercase">A propos</h1>
+	                    <p>
+	                        En se connectant à la plateforme Syndic, vous découvrez un tableau de bord conçu pour vous
+							rendre plus efficace dans vos tâches quotidiennes. En clin d’oeil, vous obtenez les
+							informations principales de votre parc immobilier ou de votre résidences.
+	                    </p>
+	                    <a href="{% url 'accounts:login' %}" class="primary-btn text-uppercase">Syndic</a>
+	                </div>
+	                {% comment %} <div class="col-lg-12 pt-60">
+	                    <p>
+	                        It won’t be a bigger problem to find one video game lover in your neighbor. Since the
+	                        introduction of Virtual Game, it has been achieving great heights so far as its popularity and
+	                        technological advancement are concerned. The history of video game is as interesting as a fairy
+	                        tale.
+	                    </p>
+	                    <p>
+	                        The quality of today’s video game was not at all there when video game first conceptualized and
+	                        played ever. During the formulative years, video games were created by using various
+	                        interactive electronic devices with various display formats. The first ever video game was
+	                        designed in 1947 by Thomas T. Goldsmith Jr.
+	                    </p>
+	                </div> {% endcomment %}
+	            </div>
+	        </div>
+	    </section>
+	    <!-- End home-about Area -->
+
+	    {% comment %} <!-- Start timeline Area -->
+	    <section class="timeline pb-120">
+	        <div class="text-center">
+	            <div class="menu-content pb-70">
+	                <div class="title text-center">
+	                    <h1 class="mb-10">My Qualifications</h1>
+	                    <p>Who are in extremely love with eco friendly system.</p>
+	                </div>
+	            </div>
+	        </div>
+	        <ul>
+	            <li>
+	                <div class="content">
+	                    <h4>
+	                        <time>Masters in Graphics & Fine Arts</time>
+	                    </h4>
+	                    <p><b>Session:</b> 2010-11</p>
+	                    <p><b>Result:</b> 3.78 (In the Scale of 4.00)</p>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="content">
+	                    <img class="img-fluid mx-auto d-block mb-30" src="img/about/c-logo.png" alt="">
+	                    <h4>
+	                        <time>Creative Content Developer</time>
+	                    </h4>
+	                    <p>July 2015 to Present</p>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="content">
+	                    <h4>
+	                        <time>Bachelor in Graphics & UI/UX</time>
+	                    </h4>
+	                    <p><b>Session:</b> 2006-09</p>
+	                    <p><b>Result:</b> 3.40 (In the Scale of 4.00)</p>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="content">
+	                    <img class="img-fluid mx-auto d-block mb-30" src="img/about/c-logo.png" alt="">
+	                    <h4>
+	                        <time>Senior UI/UX Designer</time>
+	                    </h4>
+	                    <p>July 2015 to Present</p>
+	                </div>
+	            </li>
+	            <li>
+	                <div class="content">
+	                    <h4>
+	                        <time>Diploma in Fine Arts & Printing</time>
+	                    </h4>
+	                    <p><b>Session:</b> 2003-06</p>
+	                    <p><b>Result:</b> 4.94 (In the Scale of 5.00)</p>
+	                </div>
+	            </li>
+	        </ul>
+	    </section>
+
+	    <!-- End timeline Area --> {% endcomment %}
+
+
+
+	    <!-- Start brands Area -->
+	    <section class="brands-area">
+	        <div class="container">
+	            <div class="brand-wrap">
+	                
+	            </div>
+	        </div>
+	    </section>
+	    <!-- End brands Area -->
+
+	    {% include "accueil/components/footer.html" %}
+
+
+	    <script src="{% static 'accueil/js/vendor/jquery-2.2.4.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/popper.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/vendor/bootstrap.min.js' %}"></script>
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	    <script src="{% static 'accueil/js/easing.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/hoverIntent.js' %}"></script>
+	    <script src="{% static 'accueil/js/superfish.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/jquery.ajaxchimp.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/jquery.magnific-popup.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/jquery.tabs.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/jquery.nice-select.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/isotope.pkgd.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/waypoints.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/jquery.counterup.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/simple-skillbar.js' %}"></script>
+	    <script src="{% static 'accueil/js/owl.carousel.min.js' %}"></script>
+	    <script src="{% static 'accueil/js/mail-script.js' %}"></script>
+	    <script src="{% static 'accueil/js/main.js' %}"></script>
+
+
+	</body>
+
+	</html>

@@ -1,0 +1,36 @@
+{% load static %}
+<header id="header">
+    <div class="container main-menu">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="{% url 'accueil:home' %}"><img style="width:130px;height:50px;"
+                        src="{% static 'accueil/img/logo.png' %}" alt="" title="" /></a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="{% url 'accueil:home' %}">Accueil</a></li>
+                    <li><a href="{% url 'accueil:about' %}">A propos</a></li>
+                    <li><a href="#">Solutions</a></li>
+                    <li><a href="{% url 'accueil:blog' %}">Blog</a>
+                    </li>
+                    <li><a href="{% url 'accueil:contact' %}">Contact</a></li>
+                    <li><a style="visibility: hidden;" href="#">xx</a></li>
+
+                    <li>
+                        <div class="button_cont" align="center">
+                            <a class="example_b" href="{% url 'accounts:login' %}" target="_blank" >
+                                Se connecter</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="button_cont" align="center">
+                            <a class="example_b" href="{% url 'accueil:contact' %}" target="_blank" rel="nofollow noopener">
+                                Créer un compte</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav><!-- #nav-menu-container -->
+
+        </div>
+    </div>
+</header><!-- #header -->

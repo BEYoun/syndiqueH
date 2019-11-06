@@ -1,0 +1,637 @@
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	{% load static %}
+
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Personal</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+		<!--
+			CSS
+			============================================= -->
+		<link rel="stylesheet" href="{% static 'accueil/css/linearicons.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/font-awesome.min.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/bootstrap.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/magnific-popup.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/jquery-ui.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/nice-select.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/animate.min.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/owl.carousel.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/main.css' %}">
+		<link rel="stylesheet" href="{% static 'accueil/css/perso.css' %}">
+
+	</head>
+
+	<body>
+		{% if messages %}
+                                        
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
+		<style type="text/css">
+			#overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #000;
+				filter: alpha(opacity=70);
+				-moz-opacity: 0.7;
+				-khtml-opacity: 0.7;
+				opacity: 0.7;
+				z-index: 997;
+				display: none;
+			}
+
+			.cnt223 a {
+				text-decoration: none;
+			}
+
+			.popup {
+				width: 100%;
+				margin: 0 auto;
+				display: none;
+				position: fixed;
+				z-index: 998;
+			}
+
+			.cnt223 {
+				min-width: 600px;
+				width: 600px;
+				height: 300px;
+				min-height: 150px;
+				margin: 100px auto;
+				background: #f3f3f3;
+				position: relative;
+				z-index: 999;
+				padding: 15px 35px;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px #000;
+			}
+
+			.cnt223 p {
+				clear: both;
+				color: #555555;
+				/* text-align: justify; */
+				font-size: 20px;
+				font-family: sans-serif;
+			}
+
+			.cnt223 p a {
+				color: #d91900;
+				font-weight: bold;
+			}
+
+			.cnt223 .x {
+				float: right;
+				height: 35px;
+				left: 22px;
+				position: relative;
+				top: -25px;
+				width: 34px;
+			}
+
+			.cnt223 .x:hover {
+				cursor: pointer;
+			}
+		</style>
+		<script type='text/javascript'>
+			$(function () {
+				var overlay = $('<div id="overlay"></div>');
+				overlay.show();
+				overlay.appendTo(document.body);
+				$('.popup').show();
+				$('.close').click(function () {
+					$('.popup').hide();
+					overlay.appendTo(document.body).remove();
+					return false;
+				});
+
+
+
+
+				$('.x').click(function () {
+					$('.popup').hide();
+					overlay.appendTo(document.body).remove();
+					return false;
+				});
+			});
+		</script>
+		<div class='popup'>
+			<div class='cnt223'>
+				<h1>Message</h1>
+				<ul class="messages">
+					{% for message in messages %}
+					<li class="{{ message.tags }}">{{ message }}</li>
+					{% endfor %}
+				</ul>
+					<a href='' class='close'>Fermer</a>
+			</div>
+		</div>
+		
+		{% endif %}
+		{% include "accueil/components/header.html" %}
+		<!-- start banner Area -->
+		<section class="banner-area">
+			<div class="container">
+				<div class="row fullscreen align-items-center justify-content-between">
+					<div class="col-lg-12 col-md-6 banner-left text-center">
+						<h1 style="color:#fff;">La gestion immobilière réinventée</h1>
+						<p style="color:#fff">
+							Gérez votre espace de copropriéte sur le bout des doigt
+						</p>
+						<p style="color:#fff">
+							Boostez vos résidences et rendez vos espaces plus fluides, simples et interactifs
+						</p>
+						<a href="{% url 'accounts:login' %}" style="background-color:white;color:#e73433;margin-top:100px;"
+							class="primary-btn text-uppercase">Découvrez Syndic</a>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End banner Area -->
+
+		<!-- Start home-about Area -->
+		<section class="home-about-area pt-120" style="background-color:#f9f9ff;">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="menu-content  col-lg-7">
+						<div class="title text-center">
+							<h1 class="mb-10">A propos</h1>
+						</div>
+					</div>
+				</div>
+				<div class="row align-items-center justify-content-between">
+					<div class="col-lg-6 col-md-6 home-about-right">
+						<h3>C'est quoi Syndic?</h3>
+						<p>Syndic est une plateforme qui vous permet la mise en place de plusieurs solutions afin de gérer
+							aux mieux votre flotte immobilière.</p>
+						<p>En se connectant à la plateforme Syndic, vous découvrez un tableau de bord conçu pour vous
+							rendre plus efficace dans vos tâches quotidiennes. En un clin d’oeil, vous obtenez les
+							informations principales de votre parc immobilier ou de votre résidence.</p>
+					</div>
+					<div class="col-lg- col-md-6 home-about-left text-center">
+						<div class="col-lg-12" style="margin-bottom:10px;">
+							<img class="img-fluid" src="{% static 'accueil/img/about-img.jpg' %}" alt="">
+						</div>
+						<div class="col-lg-12 ">
+							<a href="{% url 'accounts:login' %}" class="primary-btn text-uppercase">En savoir plus...</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End home-about Area -->
+
+		<!-- Start services Area -->
+		<section class="services-area section-gap">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="menu-content  col-lg-7">
+						<div class="title text-center">
+							<h1 class="mb-10">Nos solutions</h1>
+							<p>Nous proposons une panoplie de solutions pour satifaire vos besoins quotidiens.<br />
+								Que vous soyez habitant, gestionnaire ou syndique, SYNDIC cherche toujours à vous offrir le
+								meilleur des services de gestion immobilière.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-md-6">
+						<div class="single-services">
+							<img src="{% static 'boy.svg' %}" alt="un triangle aux trois côtés égaux" height="50px"
+								width="50px" />
+							<a href="#">
+								<h4>Habitant</h4>
+							</a>
+							<p style="height:273px">
+								Vous êtes habitant? Soyez le premier à faire partie de la communauté Syndic et profitez de
+								50% de remises sur vos services
+							</p>
+							<div class="text-center">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+									style="background-color:#233B79;">
+									Demandez votre démo
+								</button>
+							</div>
+
+							<!-- Modal -->
+							<div class="modal left fade" id="myModal" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+
+										<div class="modal-header">
+											<div class="col-lg-6 col-md-6">
+												<h4 class="modal-title" id="myModalLabel" style="font-size:20px;">Demande
+													de demo</h4>
+											</div>
+											<div class="col-lg-6 col-md-6">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											</div>
+										</div>
+
+										<div class="modal-body">
+											<form class="form-area contact-form text-right"
+												action="{% url 'accueil:demandeDemo' %}" method="post">
+												<div class="row">
+													<div class="col-lg-12 form-group text-left">
+														{% csrf_token %}
+														<label for="nom">Nom</label>
+														<input name="nom" placeholder="Entrer votre nom"
+															onfocus="this.placeholder = ''"
+															onblur="this.placeholder = 'Entrer votre nom'"
+															class="common-input mb-20 form-control" required=""
+															type="text">
+														<label for="prenom">Prénom</label>
+														<input name="prenom" placeholder="Entrer votre prenom"
+															onfocus="this.placeholder = ''"
+															onblur="this.placeholder = 'Entrer votre prenom'"
+															class="common-input mb-20 form-control" required=""
+															type="text">
+														<label for="nom">Fonction</label>
+														<div class="form-select" id="default-select">
+															<select name="type">
+																<option value="HA">Habitant</option>
+																<option value="MA">Géstionnaire</option>
+																<option value="SY">Syndique</option>
+															</select>
+														</div>
+														<label for="nom">Email</label>
+														<input name="email" placeholder="Entrer votre email"
+															pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+															onfocus="this.placeholder = ''"
+															onblur="this.placeholder = 'Entrer email address'"
+															class="common-input mb-20 form-control" required=""
+															type="email">
+														<label for="nom">N. télephone</label>
+														<input name="numero" placeholder="Entrer numero de télephone"
+															pattern="[0-9]+" onfocus="this.placeholder = ''"
+															onblur="this.placeholder = 'Entrée votre numero'"
+															class="common-input mb-20 form-control" required=""
+															type="number">
+													</div>
+													<div class="col-lg-12">
+														<div class="alert-msg" style="text-align: left;"></div>
+														<button type="submit" class="genric-btn primary"
+															style="float: right;">Demandez
+															votre démo</button>
+													</div>
+												</div>
+											</form>
+										</div>
+
+									</div><!-- modal-content -->
+								</div><!-- modal-dialog -->
+							</div><!-- modal -->
+
+
+
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="single-services">
+							<img src="{% static 'customer-service.svg' %}" alt="un triangle aux trois côtés égaux" height="50px"
+								width="50px" />
+							<a href="#">
+								<h4>Gestionnaire</h4>
+							</a>
+							<p>
+								Si vous êtes gestionnaire, nous vous invitons à contacter un de nos conseillers et
+								bénéficier des offres valables pour faciliter vos actions de gestion.
+							</p>
+							<div class="text-center">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+									style="background-color:#233B79;">
+									Demandez votre démo
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="single-services">
+							<img src="{% static 'man.svg' %}" alt="un triangle aux trois côtés égaux" height="50px"
+								width="50px" />
+							<a href="#">
+								<h4>Syndique</h4>
+							</a>
+							<p>
+								Vous pensez que Syndic peut subvenir à vos besoin? Nous sommes à votre écoute, et nos
+								équipes aussi pour vous délivrer le meilleur des solutions.
+							</p>
+							<div class="text-center">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+									style="background-color:#233B79;">
+									Demandez votre démo
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-12 col-md-12">
+						<div class="single-services">
+							<a href="{% url 'accueil:home' %}" class="primary-btn text-uppercase">Découvrez plus</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+		<!-- End services Area -->
+
+		<!-- Start portfolio-area Area -->
+		<section class="portfolio-area section-gap" id="portfolio" style="background-color:#f9f9ff;">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="menu-content pb-70 col-lg-8">
+						<div class="title text-center">
+							<h1 class="mb-10">Pourquoi mettre en place Syndic ?</h1>
+							<p>Syndic vous apporte une nouvelle expérience de la gestion immobilière, comment ?</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="filters-content">
+					<div data-v-39633a86="" class="row text-center mt-5 pt-4">
+						<div data-v-39633a86="" class="col-12 col-lg-4 mb-5">
+							<div data-v-39633a86="" class="min-height-icon d-flex align-items-center mb-4"><img
+									data-v-39633a86="" src="{% static 'price.svg' %}" alt="" class="icon-why mx-auto"
+									style="height:100px;margin-bottom:20px;margin-top:20px;"></div>
+							<h4 data-v-39633a86="" class="font-weight-bold mb-4">Baissez vos coûts</h4>
+							<p data-v-39633a86="" class="text-muted">Gagnez en efficacité dès la mise en place de Syndic.
+								Ses différentes fonctionnalités vous permettent de baisser vos coûts de gestion du
+								quotidien sur les tâches non-créatrices de valeurs.</p>
+						</div>
+						<div data-v-39633a86="" class="col-12 col-lg-4 mb-5">
+							<div data-v-39633a86="" class="min-height-icon d-flex align-items-center mb-4"><img
+									data-v-39633a86="" src="{% static 'idea.svg' %}" alt="" class="icon-why mx-auto"
+									style="height:100px;margin-bottom:20px;margin-top:20px;"></div>
+							<h4 data-v-39633a86="" class="font-weight-bold mb-4">Renouvelez l’expérience</h4>
+							<p data-v-39633a86="" class="text-muted">Syndic est l’outil idéal pour promouvoir votre rôle de
+								syndic auprès de vos résidents. En rendant visible votre travail au quotidien, Syndic
+								consolide votre relation client.</p>
+						</div>
+						<div data-v-39633a86="" class="col-12 col-lg-4 mb-5">
+							<div data-v-39633a86="" class="min-height-icon d-flex align-items-center mb-4"><img
+									data-v-39633a86=""
+									src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDIyLjEuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhbHF1ZV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMTMxLjIgMTM0LjUiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDEzMS4yIDEzNC41OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzA1NzFEMDt9Cjwvc3R5bGU+CjxnPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zNS43LDUxLjJMNi41LDIxLjljLTEtMS0yLjUtMS0zLjUsMGMtMSwxLTEsMi41LDAsMy41bDI4LjUsMjguNWwwLDMuNGMwLDEuNCwxLjEsMi41LDIuNSwyLjVjMCwwLDAsMCwwLDAKCQkJCWMxLjQsMCwyLjUtMS4xLDIuNS0yLjVsMC00LjRDMzYuNCw1Mi4zLDM2LjEsNTEuNiwzNS43LDUxLjJ6Ii8+CgkJPC9nPgoJPC9nPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01OC4xLDMzLjFDNTguMSwzMy4xLDU4LjEsMzMuMSw1OC4xLDMzLjFsLTUuOCwwTDIzLjgsNC42Yy0xLTEtMi41LTEtMy41LDBjLTEsMS0xLDIuNSwwLDMuNWwyOS4yLDI5LjIKCQkJCWMwLjUsMC41LDEuMSwwLjcsMS44LDAuN2MwLDAsMCwwLDAsMGw2LjksMGMxLjQsMCwyLjUtMS4xLDIuNS0yLjVDNjAuNiwzNC4yLDU5LjUsMzMuMSw1OC4xLDMzLjF6Ii8+CgkJPC9nPgoJPC9nPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDMuNywxMS44Yy0xLTEtMi41LTEtMy41LDBMNzguOSwzMy4xbC0zLjQsMGMwLDAsMCwwLDAsMGMtNi41LDAtMTIuNywyLjYtMTcuMyw3LjJsLTIuMiwyLjIKCQkJCWMtMSwxLTEsMi41LDAsMy41YzAuNSwwLjUsMS4xLDAuNywxLjgsMC43czEuMy0wLjIsMS44LTAuN2wyLjItMi4yYzMuNy0zLjcsOC42LTUuNywxMy44LTUuN2MwLDAsMCwwLDAsMGw0LjQsMGMwLDAsMCwwLDAsMAoJCQkJYzAuNywwLDEuMy0wLjMsMS44LTAuN2wyMi0yMkMxMDQuNiwxNC40LDEwNC42LDEyLjgsMTAzLjcsMTEuOHoiLz4KCQk8L2c+Cgk8L2c+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOC4zLDIxLjljLTEtMS0yLjUtMS0zLjUsMEw5NS41LDUxLjJjLTAuNSwwLjUtMC43LDEuMS0wLjcsMS44bDAsNi45YzAsMS40LDEuMSwyLjUsMi41LDIuNWMwLDAsMCwwLDAsMAoJCQkJYzEuNCwwLDIuNS0xLjEsMi41LTIuNWwwLTUuOGwyOC41LTI4LjVDMTI5LjIsMjQuNSwxMjkuMiwyMi45LDEyOC4zLDIxLjl6Ii8+CgkJPC9nPgoJPC9nPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMjguMywxMDlMOTkuOCw4MC41bDAtMy40YzAtMy4zLTAuNi02LjQtMS45LTkuNGMtMC41LTEuMy0yLTEuOS0zLjItMS4zYy0xLjMsMC41LTEuOSwyLTEuMywzLjIKCQkJCWMxLDIuNCwxLjUsNC45LDEuNSw3LjVsMCw0LjRjMCwwLjcsMC4zLDEuMywwLjcsMS44bDI5LjIsMjkuMmMwLjUsMC41LDEuMSwwLjcsMS44LDAuN3MxLjMtMC4yLDEuOC0wLjcKCQkJCUMxMjkuMiwxMTEuNiwxMjkuMiwxMTAsMTI4LjMsMTA5eiIvPgoJCTwvZz4KCTwvZz4KCTxnPgoJCTxnPgoJCQk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTEwLjksMTI2LjRMODEuNyw5Ny4yYy0wLjUtMC41LTEuMS0wLjctMS44LTAuN2MwLDAsMCwwLDAsMGwtNi45LDBjLTEuNCwwLTIuNSwxLjEtMi41LDIuNQoJCQkJYzAsMS40LDEuMSwyLjUsMi41LDIuNWMwLDAsMCwwLDAsMGw1LjgsMGwyOC41LDI4LjVjMC41LDAuNSwxLjEsMC43LDEuOCwwLjdzMS4zLTAuMiwxLjgtMC43CgkJCQlDMTExLjksMTI4LjksMTExLjksMTI3LjQsMTEwLjksMTI2LjR6Ii8+CgkJPC9nPgoJPC9nPgoJPGc+CgkJPGc+CgkJCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik05MC44LDY2LjdjLTAuNi0wLjYtMS4yLTEtMS45LTEuM2MwLjYtMSwwLjktMi4yLDAuOS0zLjRjMC0xLjktMC43LTMuNi0yLTQuOWMtMC42LTAuNi0xLjMtMS4xLTItMS40CgkJCQljMS4yLTIuNiwwLjgtNS44LTEuMy04Yy0yLjEtMi4xLTUuNC0yLjYtOC0xLjRjLTAuMy0wLjctMC44LTEuNC0xLjQtMmMtMi43LTIuNy03LjEtMi43LTkuOSwwbC05LjksOS45Yy0wLjItMi0xLjItMy45LTMtNS4xCgkJCQljLTEuNi0xLjEtMy41LTEuNS01LjQtMS4yYy0xLjksMC40LTMuNSwxLjQtNC42LDNMMzUuNiw2MWMtMi43LDQuMS00LjIsOC44LTQuMiwxMy43bDAsNS44TDIuOSwxMDljLTEsMS0xLDIuNSwwLDMuNQoJCQkJYzAuNSwwLjUsMS4xLDAuNywxLjgsMC43czEuMy0wLjIsMS44LTAuN2wyOS4yLTI5LjJjMC41LTAuNSwwLjctMS4xLDAuNy0xLjhsMC02LjljMC0zLjksMS4xLTcuNywzLjMtMTAuOWw2LjgtMTAuMQoJCQkJYzAuMy0wLjUsMC44LTAuOCwxLjQtMC45YzAuNi0wLjEsMS4xLDAsMS42LDAuM2MwLjksMC42LDEuMiwxLjksMC42LDIuOGwtMi43LDQuNGMtMC44LDEuNC0wLjUsMy4xLDAuNyw0LjFzMywwLjksNC4yLTAuMwoJCQkJbDE2LjQtMTYuNGMwLjgtMC44LDIuMS0wLjgsMi45LDBjMC40LDAuNCwwLjYsMC45LDAuNiwxLjRjMCwwLjUtMC4yLDAuOS0wLjQsMS4yTDYyLDYwLjJjLTEsMS0xLDIuNSwwLDMuNWMxLDEsMi41LDEsMy41LDAKCQkJCUw3OCw1MS4xYzAuOC0wLjgsMi4xLTAuOCwyLjksMGMwLjgsMC44LDAuOCwyLjEsMCwyLjlMNjguNCw2Ni41Yy0xLDEtMSwyLjUsMCwzLjVjMC41LDAuNSwxLjEsMC43LDEuOCwwLjdzMS4zLTAuMiwxLjgtMC43CgkJCQlsOS43LTkuN2MwLjgtMC42LDEuOS0wLjYsMi43LDAuMmMwLjQsMC40LDAuNiwwLjksMC42LDEuNHMtMC4yLDEtMC42LDEuNGwtOS41LDkuNWMtMSwxLTEsMi41LDAsMy41YzAuNSwwLjUsMS4xLDAuNywxLjgsMC43CgkJCQlzMS4zLTAuMiwxLjgtMC43bDYuNC02LjRjMC44LTAuNiwxLjktMC42LDIuNywwLjJjMC40LDAuNCwwLjYsMC45LDAuNiwxLjRzLTAuMiwxLTAuNiwxLjRMNjkuNiw5MC43Yy0zLjcsMy43LTguNiw1LjctMTMuOCw1LjcKCQkJCWMwLDAsMCwwLDAsMGwtNC40LDBjMCwwLDAsMCwwLDBjLTAuNywwLTEuMywwLjMtMS44LDAuN2wtMjMsMjNjLTEsMS0xLDIuNSwwLDMuNWMwLjUsMC41LDEuMSwwLjcsMS44LDAuN3MxLjMtMC4yLDEuOC0wLjcKCQkJCWwyMi4zLTIyLjNsMy40LDBjMCwwLDAsMCwwLDBjNi41LDAsMTIuNy0yLjYsMTcuMy03LjJsMTcuNy0xNy43QzkzLjUsNzMuOCw5My41LDY5LjQsOTAuOCw2Ni43eiIvPgoJCTwvZz4KCTwvZz4KPC9nPgo8L3N2Zz4K"
+									alt="" class="icon-why mx-auto"
+									style="height:100px;margin-bottom:20px;margin-top:20px;"></div>
+							<h4 data-v-39633a86="" class="font-weight-bold mb-4">Vos activités en synergie</h4>
+							<p data-v-39633a86="" class="text-muted">Faites de votre syndic votre principal apporteur
+								d’affaire. Grâce à la transversalité de Syndic, le syndic se retrouve au coeur de la
+								stratégie immobilière.</p>
+						</div>
+						<div data-v-39633a86="" class="col-12 mt-3 mb-5 text-center"><a data-v-39633a86=""
+								href="{% url 'accueil:blog' %}" class="btn primary-btn ">Découvrir Plus</a></div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!-- End portfolio-area Area -->
+
+
+		<!-- Start price Area -->
+		<section class="price-area section-gap" style="background-color:#0c090d">
+			<div class="container">
+				<div class="row d-flex justify-content-center">
+					<div class="menu-content pb-70 col-lg-8">
+						<div class="title text-center">
+							<h1 class="mb-10" style="color:white;">Choisissez votre plan</h1>
+							<p style="color:white;">Syndic est destiné autant aux gestionnaires qu’aux propriétaires et
+								locataires.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row rowXd" style="margin-left:75px; ">
+					<div class="col-lg-4 col-md-6 single-price firstPrice" style="margin-left:-75px;">
+						<div class="top-part">
+							<img src="{% static 'man.svg' %}" alt="un triangle aux trois côtés égaux" height="150px"
+								width="100px" />
+							<h4>Syndique</h4>
+							<p class="mt-10">Un compte pour vous et votre équipe afin de gérer vos résidences en toute
+								simplicité.</p>
+						</div>
+						<div class="package-list">
+							<ul>
+								<li>Résolutions d’incidents de A à Z</li>
+								<li>AG digitalisée</li>
+								<li>Outil de sondages</li>
+								<li>Messagerie interne</li>
+								<li>Calendrier partagée</li>
+								<li>Tableau de bord des résidences</li>
+								<li>CRM des usagers</li>
+							</ul>
+						</div>
+						<div class="bottom-part">
+							<h1>Demander démo</h1>
+							<a class="price-btn text-uppercase" href="#">Demander démo</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 single-price">
+						<div class="top-part">
+							<img src="{% static 'boy.svg' %}" alt="un triangle aux trois côtés égaux" height="150px"
+								width="100px" />
+							<h4>Habitant</h4>
+							<p class="mt-10">Accédez à vos données et celles de votre résidence pour tout connaître et ne
+								rien rater.</p>
+						</div>
+						<div class="package-list">
+							<ul>
+								<li>Déclaration d'incidents</li>
+								<li>Récapitulatif d'AG</li>
+								<li>Participer aux sondages</li>
+								<li>Messagerie interne</li>
+								<li>Calendrier partagé</li>
+								<li>Discussions entre résidents</li>
+								<li>Documentation de votre résidence</li>
+							</ul>
+						</div>
+						<div class="bottom-part">
+							<h1>Demander démo</h1>
+							<a class="price-btn text-uppercase" href="#">Demander démo</a>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 single-price">
+						<div class="top-part">
+							<img src="{% static 'customer-service.svg' %}" alt="un triangle aux trois côtés égaux"
+								height="150px" width="100px" />
+							<h4>Gestionnaire</h4>
+							<p class="mt-10">For the individuals</p>
+						</div>
+						<div class="package-list">
+							<ul>
+								<li>Secure Online Transfer</li>
+								<li>Unlimited Styles for interface</li>
+								<li>Reliable Customer Service</li>
+							</ul>
+						</div>
+						<div class="bottom-part">
+							<h1>£399.00</h1>
+							<a class="price-btn text-uppercase" href="#">Buy Now</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End price Area -->
+
+		<!-- Start recent-blog Area -->
+		<section class="recent-blog-area section-gap">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-md-8 pb-30 header-text">
+						<h1>Blog et documentations</h1>
+						<p>
+							Découvrez les dernières informations publiées par notre communauté Syndic.<br />
+							Préparez-vous pour la prochaine aventure de la gestion immobilière réinventée avec Syndic.
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="single-recent-blog col-lg-4 col-md-4">
+						<div class="thumb">
+							<img class="f-img img-fluid mx-auto" src="{% static 'accueil/img/b1.jpg' %}" alt="">
+						</div>
+						<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+							<div class="meta">
+								11 octobre 2019 14:33
+								{% comment %} <span class="lnr lnr-heart"></span> 15
+								<span class="lnr lnr-bubble"></span> 04 {% endcomment %}
+							</div>
+						</div>
+						<a href="#">
+							<h4>Break Through Self Doubt
+								And Fear</h4>
+						</a>
+						<p>
+							Dream interpretation has many forms; it can be done be done for the sake of fun, hobby or can
+							be taken up as a serious career.
+							<p class="text-right" style="margin-top:-35px"><a href="#">Lire plus...</a></p>
+						</p>
+						<div class="text-right" style="margin-top:-30px">
+							<a href="#"><span>Mark Wiens</span></a>
+							<img class="img-fluid" src="{% static 'accueil/img/user.png' %}" alt="">
+						</div>
+					</div>
+					<div class="single-recent-blog col-lg-4 col-md-4">
+						<div class="thumb">
+							<img class="f-img img-fluid mx-auto" src="{% static 'accueil/img/b2.jpg' %}" alt="">
+						</div>
+						<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+							{% comment %} <div>
+								<img class="img-fluid" src="{% static 'accueil/img/user.png' %}" alt="">
+								<a href="#"><span>Mark Wiens</span></a>
+							</div> {% endcomment %}
+							<div class="meta">
+								11 octobre 2019 14:33
+							</div>
+						</div>
+						<a href="#">
+							<h4>Portable Fashion for
+								young women</h4>
+						</a>
+						<p>
+							You may be a skillful, effective employer but if you don’t trust your personnel and the
+							opposite, then the chances of improving.<br />
+							<p class="text-right" style="margin-top:-35px"><a href="#">Lire plus...</a></p>
+						</p>
+						<p>
+
+						</p>
+						<div class="text-right" style="margin-top:-30px">
+							<a href="#"><span>Mark Wiens</span></a>
+							<img class="img-fluid" src="{% static 'accueil/img/user.png' %}" alt="">
+						</div>
+					</div>
+					<div class="single-recent-blog col-lg-4 col-md-4">
+						<div class="thumb">
+							<img class="f-img img-fluid mx-auto" src="{% static 'accueil/img/b3.jpg' %}" alt="">
+						</div>
+						<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+
+							<div class="meta">
+								11 octobre 2019 14:33
+							</div>
+						</div>
+						<a href="#">
+							<h4>Do Dreams Serve As
+								A Premonition</h4>
+						</a>
+						<p>
+							So many of us are demotivated to achieve anything. Such people are not enthusiastic about
+							anything. They don’t want to work involved.
+							<p class="text-right" style="margin-top:-35px"><a href="#">Lire plus...</a></p>
+						</p>
+						<div class="text-right" style="margin-top:-30px">
+							<a href="#"><span>Mark Wiens</span></a>
+							<img class="img-fluid" src="{% static 'accueil/img/user.png' %}" alt="">
+						</div>
+
+					</div>
+
+
+				</div>
+			</div>
+		</section>
+		<!-- end recent-blog Area -->
+
+		<!-- Start brands Area -->
+		<section class="brands-area">
+			<div class="container">
+
+				<div class="row fullscreen align-items-center justify-content-between">
+					<div class="col-lg-12 col-md-6 banner-left text-center">
+						<h1 style="color:#fff;">Testez nos solutions</h1>
+						<div>
+							<p class="text-left" style="padding:20px;color:white;">
+								Aujourd'hui est le grand jour pour construiure votres parc digital et gérer votre quartier
+								de résidence à votre goût. Partagez votre vision sur la copropriété du futur.
+							</p>
+							<a href="{% url 'accounts:login' %}" style="background-color:#233B79;"
+								class="primary-btn text-uppercase">Rejoindre notre test client</a>
+							<a href="{% url 'accounts:login' %}" class="primary-btn text-uppercase">Rejoindre notre
+								communauté</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- End brands Area -->
+
+		{% include "accueil/components/footer.html" %}
+
+		<script src="{% static 'accueil/js/vendor/jquery-2.2.4.min.js' %}"></script>
+		<script src="{% static 'accueil/js/popper.min.js' %}"></script>
+		<script src="{% static 'accueil/js/vendor/bootstrap.min.js' %}"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+		<script src="{% static 'accueil/js/easing.min.js' %}"></script>
+		<script src="{% static 'accueil/js/hoverIntent.js' %}"></script>
+		<script src="{% static 'accueil/js/superfish.min.js' %}"></script>
+		<script src="{% static 'accueil/js/jquery.ajaxchimp.min.js' %}"></script>
+		<script src="{% static 'accueil/js/jquery.magnific-popup.min.js' %}"></script>
+		<script src="{% static 'accueil/js/jquery.tabs.min.js' %}"></script>
+		<script src="{% static 'accueil/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static 'accueil/js/isotope.pkgd.min.js' %}"></script>
+		<script src="{% static 'accueil/js/waypoints.min.js' %}"></script>
+		<script src="{% static 'accueil/js/jquery.counterup.min.js' %}"></script>
+		<script src="{% static 'accueil/js/simple-skillbar.js' %}"></script>
+		<script src="{% static 'accueil/js/owl.carousel.min.js' %}"></script>
+		<script src="{% static 'accueil/js/mail-script.js' %}"></script>
+		<script src="{% static 'accueil/js/main.js' %}"></script>
+	</body>
+
+	</html>

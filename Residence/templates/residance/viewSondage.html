@@ -1,0 +1,259 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/forms/select/select2.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/charts/apexcharts.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static " data-open="click"
+data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/users.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "residance/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+
+    <!-- BEGIN: Header-->
+    {% include "residance/components/Header.html" %}
+    <!-- END: Header-->
+
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">View Sondage</h2>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active">Sondage detail
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section class="basic-select2" data-select2-id="128">
+                <div class="row" data-select2-id="127">
+                    <div class="col-12" data-select2-id="126">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Sonage</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-12">
+                                            <div class="text-bold-600 font-medium-2">
+                                                Selectionner sondage pour voir les details
+                                            </div>
+                                            <div class="form-group">
+                                                <form method="POST"
+                                                    action="{% url 'residance:viewSondage' id_batiment%}">
+                                                    {% csrf_token %}
+                                                    <select class="select2-theme form-control" name="id_sondage"
+                                                        id="select2-theme">
+                                                        <optgroup label="Question Des Sondage">
+                                                            {% for sondage in sondages %}
+                                                            <option value="{{sondage.id}}">{{sondage.question}}</option>
+                                                            {% endfor %}
+                                                        </optgroup>
+                                                    </select>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 text-right">
+                                                            <button type="submit" class="btn btn-primary">Voir le
+                                                                sondage</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {% if viewS %}
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Les Reponse du sondage "<code>{{viewS.question}}</code>"</h4>
+                        </div>
+                        <div class="card-body">
+                            
+                            <div class="col-lg-6 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Statistique de "{{viewS.question}}"</h4>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div id="donut-chart" class="mx-auto"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <ul>
+                                {% for comm in comments %}
+                                    <li>series-{{ forloop.counter }} equivaut a : {{comm.rep}}</li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+<!-- BEGIN: Footer-->
+{% block Footer %}
+
+<footer class="footer footer-static footer-light">
+    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT
+            &copy; 2019<a class="text-bold-800 grey darken-2"
+                href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">Pixinvent,</a>All
+            rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                class="feather icon-heart pink"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+    </p>
+</footer>
+{% endblock %}
+<!-- END: Footer-->
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/forms/select/select2.full.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/charts/apexcharts.min.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+
+<script src="{% static 'app-assets/js/scripts/pages/user-profile.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/forms/select/form-select2.js' %}"></script>
+<script>
+    /*=========================================================================================
+    File Name: chart-apex.js
+    Description: Apexchart Examples
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuesax HTML Admin Template
+    Version: 1.1
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+    $(document).ready(function () {
+
+        var $primary = '#7367F0',
+            $success = '#28C76F',
+            $danger = '#EA5455',
+            $warning = '#FF9F43',
+            $info = '#00cfe8',
+            $label_color_light = '#dae1e7';
+
+        var themeColors = [$primary, $success, $danger, $warning, $info];
+
+
+        // Donut Chart
+        // -----------------------------
+        var donutChartOptions = {
+            chart: {
+                type: 'donut',
+                height: 350
+            },
+            colors: themeColors,
+            series: [
+            {% for comm in comments %}
+                {{comm.nombreVote}},
+            {% endfor %}],
+            legend: {
+                itemMargin: {
+                    horizontal: 2
+                },
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 350
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+        var donutChart = new ApexCharts(
+            document.querySelector("#donut-chart"),
+            donutChartOptions
+        );
+
+        donutChart.render();
+
+    });
+</script>
+{% endblock %}
+<!-- END: Page JS-->

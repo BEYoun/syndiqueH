@@ -1,0 +1,123 @@
+{% load static %}
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand"
+                    href="../../../html/ltr/vertical-menu-template/index.html">
+                    <div>
+                        <img src="{% static 'app-assets/images/logo/vuesax-logo.png' %}"
+                            alt="Grapefruit slice atop a pile of other slices">
+                    </div>
+                    <h2 class="brand-text mb-0">Syndic</h2>
+                </a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                        class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i
+                        class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary"
+                        data-ticon="icon-disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class=" nav-item"><a href="{% url 'syndique:home' %}"><i class="feather icon-home"></i><span class="menu-title"
+                        data-i18n="Dashboard">Dashboard</span><span
+                        class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+
+            </li>
+            <li class="{% if "home" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:home' id_batiment %}"><i
+                        class="feather icon-mail"></i><span class="menu-title" data-i18n="Email">Residance {{batiment.nom}}</span></a>
+            </li>
+            <li class="{% if "calendrier" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:calendrier' id_batiment %}"><i
+                        class="feather icon-message-square"></i><span class="menu-title"
+                        data-i18n="Chat">Calendrier</span></a>
+            </li>
+            <li class="{% if "email" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:email' id_batiment %}"><i
+                        class="feather icon-check-square"></i><span class="menu-title"
+                        data-i18n="Todo">Messagerie</span></a>
+            </li>
+            <li class="{% if "alerte" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:alerte' id_batiment %}"><i
+                        class="feather icon-calendar"></i><span class="menu-title"
+                        data-i18n="Calender">Incidents</span></a>
+            </li>
+            <li class="{% if "newSondage" in request.get_full_path or  "viewSondage" in request.get_full_path %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:newSondage' id_batiment %}"><i
+                        class="feather icon-calendar"></i><span class="menu-title"
+                        data-i18n="Calender">Sondage</span></a>
+            </li>
+            <li class="{% if "todo" in request.get_full_path or "detailAssemblee" in request.get_full_path %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:todo' id_batiment %}"><i
+                        class="feather icon-calendar"></i><span class="menu-title"
+                        data-i18n="Calender">Assemblees</span></a>
+            </li>
+            <li class="{% if "newHab" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:newHab' id_batiment %}"><i
+                        class="feather icon-calendar"></i><span class="menu-title"
+                        data-i18n="Calender">Habitant</span></a>
+            </li>
+            {% comment %} <li class="{% if "document" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:document' id_batiment %}"><i
+                        class="feather icon-calendar"></i><span class="menu-title"
+                        data-i18n="Calender">Documentation</span></a>
+            </li> {% endcomment %}
+{% comment %} 
+            <li class=" navigation-header"><span>Services</span>
+            </li>
+            
+            <li class="{% if "newHab" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="#"><i class="feather icon-list"></i><span class="menu-title"
+                        data-i18n="Data List">Gestion Habitants</span></a>
+                <ul class="menu-content">
+                    <li><a href="{% url 'residance:newHab' id_batiment %}"><i class="feather icon-circle"></i><span
+                                class="menu-item" data-i18n="List View">Ajout Habitant</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{% if "newSondage" in request.get_full_path or  "viewSondage" in request.get_full_path%}
+                active
+            {% endif %} nav-item"><a href="#"><i class="feather icon-list"></i><span class="menu-title"
+                        data-i18n="Data List">Gestion Sondage</span></a>
+                <ul class="menu-content">
+                    <li><a href="{% url 'residance:newSondage' id_batiment %}"><i class="feather icon-circle"></i><span
+                                class="menu-item" data-i18n="List View">Nouveau Sondage</span></a>
+                    </li>
+                    <li><a href="{% url 'residance:viewSondage' id_batiment %}"><i class="feather icon-circle"></i><span
+                                class="menu-item" data-i18n="List View">Voir les sondage</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class=" nav-item"><a href="#"><i class="feather icon-list"></i><span class="menu-title"
+                        data-i18n="Data List">Gestion Assemblee</span></a>
+                <ul class="menu-content">
+                    <li><a href="{% url 'residance:newSondage' id_batiment %}"><i class="feather icon-circle"></i><span
+                                class="menu-item" data-i18n="List View">Nouvelle assemblees</span></a>
+                    </li>
+                    <li><a href="{% url 'residance:viewSondage' id_batiment %}"><i class="feather icon-circle"></i><span
+                                class="menu-item" data-i18n="List View">Voir les assemblees</span></a>
+                    </li>
+                </ul>
+            </li> {% endcomment %}
+            <li class="{% if "cotisation" in request.get_full_path %}
+                active
+            {% endif %} nav-item"><a href="{% url 'residance:cotisation' id_batiment %}"><i
+                        class="feather icon-bar-chart"></i><span class="menu-title" data-i18n="User dataTables">Les Cotisations</span></a>
+            </li>
+            {% comment %}<li class=" nav-item"><a href="app-user.html"><i class="feather icon-bar-chart"></i><span class="menu-title"
+                        data-i18n="User dataTables">Documents</span></a>
+            </li> {% endcomment %}
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,248 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "habitant/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static " data-open="click"
+data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+    {% include "habitant/components/Header.html" %}
+
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Alerte et Incident</h2>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item active">Alerte et Incident
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <div class="row">
+                <div class="col-12">
+                
+                    <div class="modal-warning mr-1 mb-1 d-inline-block">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#warning">
+                            Signaler une nouvelle Alerte
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade text-left" id="warning" tabindex="-1" role="dialog"
+                            aria-labelledby="myModalLabel140" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered " role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-dark white">
+                                        <h5 class="modal-title" id="myModalLabel140">ALERTE</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            Signaler une alerte
+                                        </p>
+                                        <form action="{% url 'habitant:AlerteIncident' %}" method="POST">
+                                            {% csrf_token %}
+                                            {% for field in form  %}
+                                                <label>{{ field.label_tag }} </label>
+                                                <div class="form-group">
+                                                    {{ field }}
+                                                    {% if field.help_text %}
+                                                    <small style="color: grey">{{ field.help_text }}</small>
+                                                    {% endif %}
+                                                    {% for error in field.errors %}
+                                                    <p style="color: red">{{ error }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                            {% endfor %}
+                                                    
+                                            <button type="submit" class="btn btn-dark">Signaler</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-dismiss="modal">Quitter</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Background variants section start -->
+            <section id="bg-variants">
+                <div class="row">
+                    <div class="col-12 mt-3 mb-1">
+                        <h4 class="text-uppercase">Alerte Non Resolue </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for alerte in alertes %}
+                    {% if alerte.vue == False %}
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <img class="card-img img-fluid" src="{% static 'app-assets/images/slider/04.jpg' %}"
+                                    alt="Card image">
+                                <div class="card-img-overlay overlay-danger overlay-lighten-2">
+                                    <h4 class="card-title text-white">Incident {{ forloop.counter }}</h4>
+                                    <p class="card-text text-white">{{alerte.cause}}.
+                                    </p>
+                                    <p class="card-text"><small class="text-white">{{alerte.created_at}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3 mb-1">
+                        <h4 class="text-uppercase">Alerte en cour </h4>
+                    </div>
+                </div>
+                <div class="row">
+                {% for alerte in alertes %}
+                    {% if alerte.vue %}
+                    {% if alerte.etat == False %}
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <img class="card-img img-fluid" src="{% static 'app-assets/images/slider/04.jpg' %}"
+                                    alt="Card image">
+                                <div class="card-img-overlay overlay-warning">
+                                    <h4 class="card-title text-white">Incident {{ forloop.counter }}</h4>
+                                    <p class="card-text text-white">{{alerte.cause}}.
+                                    </p>
+                                    <p class="card-text"><small class="text-white">{{alerte.created_at}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mt-3 mb-1">
+                        <h4 class="text-uppercase">Alerte Resolue </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for alerte in alertes %}
+                    {% if alerte.vue %}
+                    {% if alerte.etat %}
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="card text-white border-0 box-shadow-0">
+                            <div class="card-content">
+                                <img class="card-img img-fluid" src="{% static 'app-assets/images/slider/04.jpg' %}"
+                                    alt="Card image">
+                                <div class="card-img-overlay overlay-success">
+                                    <h4 class="card-title text-white">alert 3</h4>
+                                    <p class="card-text text-white"> test.
+                                    </p>
+                                    <p class="card-text text-white"><small class="text-muted">il y a 5 jours</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </section>
+            <!-- Background variants section end -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+<!-- BEGIN: Footer-->
+{% block Footer %}
+<footer class="footer footer-static footer-light">
+    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT
+            &copy; 2019<a class="text-bold-800 grey darken-2"
+                href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">Pixinvent,</a>All
+            rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                class="feather icon-heart pink"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+    </p>
+</footer>
+{% endblock %}
+<!-- END: Footer-->
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+{% endblock %}
+
+
+<!-- END: Page JS-->

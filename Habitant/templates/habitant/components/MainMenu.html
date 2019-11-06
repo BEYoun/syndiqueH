@@ -1,0 +1,79 @@
+{% load static %}
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand"
+                    href="../../../html/ltr/vertical-menu-template/index.html">
+                    <div>
+                        <img src="{% static 'app-assets/images/logo/vuesax-logo.png' %}"
+                            alt="Grapefruit slice atop a pile of other slices">
+                    </div>
+                    <h2 class="brand-text mb-0">Syndic</h2>
+                </a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                        class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i
+                        class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary"
+                        data-ticon="icon-disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            
+
+            <li class="{% if request.get_full_path == "/habitant/maResidance" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:maResidance' %}"><i class="feather icon-home"></i><span class="menu-title"
+                        data-i18n="Dashboard">Acceuil</span></a>
+            </li>
+            <li class="{% if request.get_full_path == "/habitant/home" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:home' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Ma résidence</span></a>
+            </li>
+            <li class="{% if "calendrier" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:calendrier' %}"><i
+                        class="feather icon-message-square"></i><span class="menu-title"
+                        data-i18n="Chat">Calendrier</span></a>
+            </li>
+            <li class="{% if request.get_full_path == "/habitant/email" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:email' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Messagerie</span></a>
+            </li>
+            </li>
+            <li class="{% if request.get_full_path == "/habitant/todo" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:todo' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Assemblees</span></a>
+            </li>
+            <li class="{% if request.get_full_path == "/habitant/sondage" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:sondage' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Sondage</span></a>
+            </li>
+            
+            {% comment %} <li class="{% if request.get_full_path == "/habitant/facture" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:email' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Gestion des factures</span></a>
+            </li> {% endcomment %}
+            <li class="{% if request.get_full_path == "/habitant/cotisation" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:cotisation' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Cotisation</span></a>
+            </li>
+            <li class="{% if request.get_full_path == "/habitant/ContactUrgence" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:ContactUrgence' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Contact et Urgences</span></a>
+            </li>
+            <li class="{% if request.get_full_path == "/habitant/AlerteIncident" %}
+                active
+            {% endif %} nav-item"><a href="{% url 'habitant:AlerteIncident' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Incident et alertes</span></a>
+            </li>
+        </ul>
+    </div>
+</div>

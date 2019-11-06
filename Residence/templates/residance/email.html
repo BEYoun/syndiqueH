@@ -1,0 +1,832 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/editors/quill/katex.min.css' %}">
+<link rel="stylesheet" type="text/css"
+    href="{% static 'app-assets/vendors/css/editors/quill/monokai-sublime.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/editors/quill/quill.snow.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/app-email.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "residance/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern content-left-sidebar email-application navbar-floating footer-static "
+data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar"
+{% endblock %}
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+
+    <!-- BEGIN: Header-->
+    {% include "residance/components/Header.html" %}
+    <!-- END: Header-->
+
+    <div class="content-area-wrapper">
+        <div class="sidebar-left">
+            <div class="sidebar">
+                <div class="sidebar-content email-app-sidebar d-flex">
+                    <span class="sidebar-close-icon">
+                        <i class="feather icon-x"></i>
+                    </span>
+                    <div class="email-app-menu">
+                        <div class="form-group form-group-compose text-center compose-btn">
+                            <button type="button" class="btn btn-primary btn-lg btn-block my-2" data-toggle="modal"
+                                data-target="#composeForm"><i class="feather icon-edit"></i> Rédiger</button>
+                        </div>
+                        <div class="sidebar-menu-list">
+                            <div class="list-group list-group-messages font-medium-1">
+                                <a href="#" class="list-group-item list-group-item-action border-0 pt-0 active">
+                                    <i class="font-medium-5 feather icon-mail mr-50"></i> Boite de reception <span
+                                        class="badge badge-primary badge-pill float-right">3</span>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action border-0"><i
+                                        class="font-medium-5 fa fa-paper-plane-o mr-50"></i>message Envoie</a>
+
+
+                                <a href="#" class="list-group-item list-group-item-action border-0"><i
+                                        class="font-medium-5 feather icon-trash mr-50"></i>
+                                    Corbeille</a>
+                            </div>
+                            <hr>
+                            <h5 class="my-2 pt-25">Labels</h5>
+                            <div class="list-group list-group-labels font-medium-1">
+                                <a href="#"
+                                    class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span
+                                        class="bullet bullet-success mr-1"></span> Résidance</a>
+                                <a href="#"
+                                    class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span
+                                        class="bullet bullet-primary mr-1"></span> Association</a>
+                                <a href="#"
+                                    class="list-group-item list-group-item-action border-0 d-flex align-items-center"><span
+                                        class="bullet bullet-warning mr-1"></span> Important</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade text-left" id="composeForm" tabindex="-1" role="dialog"
+                    aria-labelledby="emailCompose" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <form action="{% url 'syndique:email' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title text-text-bold-600" id="emailCompose">Nouveau message</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body pt-1">
+
+                                    <div class="form-label-group mt-1">
+                                        <select class="custom-select" id="emailTo">
+                                                        <option selected>To</option>
+                                                        {% for user in usagers %}
+                                                        <option value="{{user.id}}">{{user.email}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                        <label>To</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="text" id="emailSubject" class="form-control" placeholder="Subject"
+                                            name="fname-floating">
+                                        <label for="emailSubject">Subject</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="text" id="emailCC" class="form-control" placeholder="CC"
+                                            name="fname-floating">
+                                        <label for="emailCC">CC</label>
+                                    </div>
+                                    <div class="form-label-group">
+                                        <input type="text" id="emailBCC" class="form-control" placeholder="BCC"
+                                            name="fname-floating">
+                                        <label for="emailBCC">BCC</label>
+                                    </div>
+                                    <div id="email-container">
+                                        <textarea class="editor" data-placeholder="Message" name="message" rows="5"
+                                            cols="50">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" value="Send" class="btn btn-primary">
+                                    <input type="Reset" value="Cancel" class="btn btn-white" data-dismiss="modal">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="content-wrapper">
+                <div class="content-header row">
+                </div>
+                <div class="content-body">
+                    <div class="app-content-overlay"></div>
+                    <div class="email-app-area">
+                        <!-- Email list Area -->
+                        <div class="email-app-list-wrapper">
+                            <div class="email-app-list">
+                                <div class="app-fixed-search">
+                                    <div class="sidebar-toggle d-block d-lg-none"><i class="feather icon-menu"></i>
+                                    </div>
+                                    <fieldset class="form-group position-relative has-icon-left m-0">
+                                        <input type="text" class="form-control" id="email-search"
+                                            placeholder="Search email">
+                                        <div class="form-control-position">
+                                            <i class="feather icon-search"></i>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="app-action">
+                                    <div class="action-left">
+                                        <div class="vs-checkbox-con selectAll">
+                                            <input type="checkbox">
+                                            <span class="vs-checkbox">
+                                                <span class="vs-checkbox--check">
+                                                    <i class="vs-icon feather icon-minus"></i>
+                                                </span>
+                                            </span>
+                                            <span>Select Tout</span>
+                                        </div>
+                                    </div>
+                                    <div class="action-right">
+                                        <ul class="list-inline m-0">
+                                            <li class="list-inline-item">
+                                                <div class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" id="folder"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <i class="feather icon-folder"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                        aria-labelledby="folder">
+                                                        <a class="dropdown-item d-flex font-medium-1" href="#"><i
+                                                                class="font-medium-3 feather icon-edit-2 mr-50"></i>
+                                                            Draft</a>
+                                                        <a class="dropdown-item d-flex font-medium-1" href="#"><i
+                                                                class="font-medium-3 feather icon-info mr-50"></i>
+                                                            Spam</a>
+                                                        <a class="dropdown-item d-flex font-medium-1" href="#"><i
+                                                                class="font-medium-3 feather icon-trash mr-50"></i>
+                                                            Trash</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <div class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" id="tag" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        <i class="feather icon-tag"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right"
+                                                        aria-labelledby="tag">
+                                                        <a href="#" class="dropdown-item font-medium-1"><span
+                                                                class="mr-1 bullet bullet-success bullet-sm"></span>
+                                                            Personal</a>
+                                                        <a href="#" class="dropdown-item font-medium-1"><span
+                                                                class="mr-1 bullet bullet-primary bullet-sm"></span>
+                                                            Company</a>
+                                                        <a href="#" class="dropdown-item font-medium-1"><span
+                                                                class="mr-1 bullet bullet-warning bullet-sm"></span>
+                                                            Important</a>
+                                                        <a href="#" class="dropdown-item font-medium-1"><span
+                                                                class="mr-1 bullet bullet-danger bullet-sm"></span>
+                                                            Private</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-inline-item mail-unread"><span class="action-icon"><i
+                                                        class="feather icon-mail"></i></span></li>
+                                            <li class="list-inline-item mail-delete"><span class="action-icon"><i
+                                                        class="feather icon-trash"></i></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="email-user-list list-group">
+                                    <ul class="users-list-wrapper media-list">
+                                        <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img src="../../../app-assets/images/portrait/small/avatar-s-20.png"
+                                                        alt="avtar img holder">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Tonny
+                                                            Deep</h5>
+                                                        <span class="list-group-item-text text-truncate">Focused
+                                                            impactful open system</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span
+                                                                class="mr-1 bullet bullet-success bullet-sm"></span><span
+                                                                class="mail-date">4:14 AM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text truncate mb-0">Hey John, bah kivu
+                                                        decrete epanorthotic unnotched Argyroneta nonius veratrine
+                                                        preimaginary saunders demidolmen Chaldaic allusiveness lorriker
+                                                        unworshipping ribaldish tableman hendiadys outwrest unendeavored
+                                                        fulfillment scientifical Pianokoto CheloniaFreudian sperate
+                                                        unchary hyperneurotic phlogiston duodecahedron unflown Paguridea
+                                                        catena disrelishable Stygian paleopsychology cantoris
+                                                        phosphoritic disconcord fruited inblow somewhatly ilioperoneal
+                                                        forrard palfrey Satyrinae outfreeman melebiose</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-17.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Louis
+                                                            Welch </h5>
+                                                        <span class="list-group-item-text text-truncate">Thanks, Let's
+                                                            do it.</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mr-1 bullet bullet-danger bullet-sm"></span>
+                                                            <span class="mail-date">2:15 AM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hi, Can we connect
+                                                        today? Cheesecake croissant jelly beans. Cake caramels pie
+                                                        chocolate. Muffin jujubes dragée carrot cake candy icing bonbon.
+                                                        Danish caramels topping oat cake sweet roll liquorice tootsie
+                                                        roll halvah.Chocolate bar jujubes jelly-o tart tiramisu
+                                                        croissant dragée cupcake jelly. </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {% comment %} <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-7.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Envato
+                                                            Market</h5>
+                                                        <span class="list-group-item-text text-truncate">You have new
+                                                            comment...</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mr-1 bullet bullet-success bullet-sm"></span>
+                                                            <span class="mail-date">2:15 AM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hi There, Cotton candy
+                                                        jujubes ice cream candy. Oat cake jelly jelly brownie danish
+                                                        marzipan gummi bears. Cupcake sweet bonbon tart. Sweet croissant
+                                                        jelly beans dragée chocolate cake gingerbread topping chocolate
+                                                        bar lemon drops.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-5.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Sarah
+                                                            Montgomery </h5>
+                                                        <span class="list-group-item-text text-truncate">Your New
+                                                            UI.</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span
+                                                                class="mr-1 bullet bullet-warning bullet-sm"></span><span
+                                                                class="mail-date">Yesterday</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text text-truncate mb-0">Hello, Everything
+                                                        looks good. Pastry marshmallow sugar plum. Gingerbread bonbon
+                                                        fruitcake gummi bears wafer chocolate cake gummies tart ice
+                                                        cream. Danish topping biscuit dessert donut dessert. Chocolate
+                                                        jelly-o topping marzipan fruitcake.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-3.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Ardis
+                                                            Balderson</h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Focused
+                                                            impactful open system</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <i class="fa-paperclip fa"></i> <span
+                                                                class="mx-1 bullet bullet-warning bullet-sm"></span>
+                                                            <span class="mail-date">15 July</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hey John, bah kivu
+                                                        decrete epanorthotic unnotched Argyroneta nonius veratrine
+                                                        preimaginary saunders demidolmen Chaldaic allusiveness lorriker
+                                                        unworshipping ribaldish tableman hendiadys outwrest unendeavored
+                                                        fulfillment scientifical Pianokoto CheloniaFreudian sperate
+                                                        unchary hyperneurotic phlogiston duodecahedron unflown Paguridea
+                                                        catena disrelishable Stygian paleopsychology cantoris
+                                                        phosphoritic disconcord fruited inblow somewhatly ilioperoneal
+                                                        forrard palfrey</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-8.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">
+                                                            Modestine Spat</h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Profound
+                                                            systemic alliance 🎉</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-info bullet-sm"></span>
+                                                            <span class="mail-date">11 July</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hey John, Parthenopean
+                                                        logeion chipwood tonsilitic cockleshell substance Stilbum
+                                                        dismayed tape Alderamin Phororhacos bridewain zoonomia lujaurite
+                                                        printline extraction weanedness charterless splitmouth bindoree
+                                                        unfit philological Pythonissa scintillescentcinchonism sabbaton
+                                                        thyrocricoid dissuasively schematograph immerse pristane
+                                                        stimulability unreligion uncomplemental uteritis nef bavenite
+                                                        Hachiman teleutosorus anterolateral infirmate Nahani Hyla barile
+                                                        farthing</p>
+                                                </div>
+                                            </div>
+                                        </li> {% endcomment %}
+                                        {% comment %} <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-11.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Eb Begg
+                                                        </h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Organized
+                                                            value-added model</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-success bullet-sm"></span>
+                                                            <span class="mail-date">1 July</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hello Sir, Lituola
+                                                        restrengthen bathofloric manciple decaffeinize Debby aciliated
+                                                        eatage proscribe prejurisdiction buttle quacky hyposecretion
+                                                        indemonstrableness schelling lymphopathy consumptivity
+                                                        nonappointment filminess spumiform erotogenicity equestrianize
+                                                        boneflower interlardationallocate ponzite cote guilder tuff
+                                                        strind blamefully cocaine monstrously apocalyptically sublanate
+                                                        cherubimical oligoplasmia Miltonian hydrazyl unbeset statured
+                                                        Unami Cordeau strouthiocamelian geitjie</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-10.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Waldemar
+                                                            Mannering</h5>
+                                                        <span
+                                                            class="list-group-item-text text-truncate mb-0">Quality-focused
+                                                            methodical flexibility</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-danger bullet-sm"></span>
+                                                            <span class="mail-date">19 Jun</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hi John, wartproof
+                                                        ketoheptose incomplicate hyomental organal supermaterial
+                                                        monogene sophister nizamate rightle multifilament phloroglucic
+                                                        overvehement boatloading derelictly probudgeting archantiquary
+                                                        unknighted pallograph Volcanalia Jacobitiana ethyl neth
+                                                        Jugataenoumenalize irredential energeia phlebotomist galp
+                                                        dactylitis unparticipated solepiece demure metarhyolite toboggan
+                                                        unpleased perilaryngeal binoxalate rabbitry atomic duali
+                                                        dihexahedron Pseudogryphus boomboat obelisk</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-6.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Louetta
+                                                            Esses</h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Company
+                                                            Report</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-info bullet-sm"></span>
+                                                            <span class="mail-date">2 Jun</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hi John,Biscuit lemon
+                                                        drops marshmallow. Cotton candy marshmallow bear claw. Dragée
+                                                        tiramisu cookie cotton candy. Carrot cake sweet roll I love
+                                                        macaroon wafer jelly soufflé I love dragée. Jujubes jelly I love
+                                                        carrot cake topping I love. Sweet candy I love</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-9.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Tressa
+                                                            Gass</h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Theme
+                                                            Update</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-info bullet-sm"></span>
+                                                            <span class="mail-date">29 May</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate"> Hello John,Chocolate
+                                                        bar chupa chups sweet roll chocolate muffin macaroon liquorice
+                                                        tart. Carrot cake topping jelly-o cupcake sweet apple pie jelly
+                                                        I love. Chocolate cake I love dessert carrot cake tootsie roll
+                                                        chocolate I love. Tootsie roll pie marzipan sesame snaps.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-20.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Tommy
+                                                            Sicilia</h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Thanks,
+                                                            Let's do it.</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-warning bullet-sm"></span>
+                                                            <span class="mail-date">17 May</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hi John,Biscuit lemon
+                                                        drops marshmallow. Cotton candy marshmallow bear claw. Dragée
+                                                        tiramisu cookie cotton candy. Carrot cake sweet roll I love
+                                                        macaroon wafer jelly soufflé I love dragée. Jujubes jelly I love
+                                                        carrot cake topping I love. Sweet candy I love.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media mail-read">
+                                            <div class="media-left pr-50">
+                                                <div class="avatar">
+                                                    <img class="media-object rounded-circle"
+                                                        src="../../../app-assets/images/portrait/small/avatar-s-17.png"
+                                                        alt="Generic placeholder image">
+                                                </div>
+                                                <div class="user-action">
+                                                    <div class="vs-checkbox-con">
+                                                        <input type="checkbox">
+                                                        <span class="vs-checkbox vs-checkbox-sm">
+                                                            <span class="vs-checkbox--check">
+                                                                <i class="vs-icon feather icon-check"></i>
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                    <span class="favorite"><i class="feather icon-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <div class="user-details">
+                                                    <div class="mail-items">
+                                                        <h5 class="list-group-item-heading text-bold-600 mb-25">Heather
+                                                            Howell</h5>
+                                                        <span class="list-group-item-text text-truncate mb-0">Thanks,
+                                                            Let's do it.</span>
+                                                    </div>
+                                                    <div class="mail-meta-item">
+                                                        <span class="float-right">
+                                                            <span class="mx-1 bullet bullet-warning bullet-sm"></span>
+                                                            <span class="mail-date">21 Mar</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="mail-message">
+                                                    <p class="list-group-item-text mb-0 truncate">Hi John,Biscuit lemon
+                                                        drops marshmallow. Marzipan carrot cake soufflé. Toffee tiramisu
+                                                        pudding cotton candy powder jujubes pie. Topping danish sweet
+                                                        croissant liquorice lemon drops cake oat cake brownie. Cupcake
+                                                        liquorice tart tootsie roll sugar plum chocolate bar oat cake
+                                                        sweet roll.</p>
+                                                </div>
+                                            </div>
+                                        </li> {% endcomment %}
+                                    </ul>
+                                    <div class="no-results">
+                                        <h5>No Items Found</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Email list Area -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/editors/quill/katex.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/editors/quill/highlight.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/editors/quill/quill.min.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/pages/app-email.js' %}"></script>
+{% endblock %}
+
+
+<!-- END: Page JS-->

@@ -1,0 +1,218 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/tables/datatable/datatables.min.css' %}">
+<link rel="stylesheet" type="text/css"
+    href="{% static 'app-assets/vendors/css/tables/datatable/select.dataTables.min.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/pickers/pickadate/pickadate.css' %}">
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/toastr.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static " data-open="click"
+data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/app-users.css' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/extensions/toastr.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "habitant/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+    {% include "habitant/components/Header.html" %}
+    <div class="content-wrapper">
+        <div class="content-header row">
+
+        </div>
+        <div class="content-body">
+            <!-- User Table -->
+            <section>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <!-- Begin Users Profile -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header">
+                            <h4>Historique des cotisation</h4>
+                        </div>
+                        <div class="card-dashboard">
+                            <div class="table-responsive">
+                                <table class="table zero-configuration">
+                                    <thead>
+                                        <tr class="text-uppercase">
+                                            <th></th>
+                                            <th>Date de paiement</th>
+                                            <th>Prix</th>
+                                            <th>Etat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for cotisation in cotisations %}
+                                    
+                                        <tr>
+                                            <td></td>
+                                            <td>{{cotisation.date|date:'F Y'}}</td>
+                                            <td>1200 dh</td>
+                                            <td>{% if  cotisation.etat %}
+                                                
+                                                {% if contisation.reponse %}
+                                                    accepte
+                                                {% else %}
+                                                    refuse
+                                                {% endif %}
+                                            {% else %}
+                                                Non traité
+                                            {% endif %}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    
+                                        
+                                    </tbody>
+                                </table>
+                                <div class="modal-warning mr-1 mb-1 d-inline-block">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-outline-warning" data-toggle="modal"
+                                        data-target="#warning">
+                                        Demande de validation de paiement
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade text-left" id="warning" tabindex="-1" role="dialog"
+                                        aria-labelledby="myModalLabel140" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered " role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-dark white">
+                                                    <h5 class="modal-title" id="myModalLabel140">Validation de paiement</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                        Envoie de demande de validation de paiement
+                                                    </p>
+                                                    <form action="{% url 'habitant:cotisation' %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <label>Selectionner date de paiement</label>
+                                                        <input type='text' class="form-control format-picker" name ="date"/>
+                                                        <button type="submit" class="btn btn-dark">Envoie
+                                                            demande</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger"
+                                                        data-dismiss="modal">Quitter</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Users Profile -->
+
+            </section>
+
+            <!-- User Table-->
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+<!-- BEGIN: Footer-->
+{% block Footer %}
+<footer class="footer footer-static footer-light">
+    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT
+            &copy; 2019<a class="text-bold-800 grey darken-2"
+                href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">Pixinvent,</a>All
+            rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                class="feather icon-heart pink"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+    </p>
+</footer>
+
+{% endblock %}
+<!-- END: Footer-->
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/tables/datatable/datatables.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/tables/datatable/dataTables.select.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.date.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.time.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/pickers/pickadate/legacy.js' %}"></script>
+
+<script src="{% static 'app-assets/vendors/js/extensions/toastr.min.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/datatables/user-datatable.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/modal/components-modal.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js' %}"></script>
+
+<script src="{% static 'app-assets/js/scripts/extensions/toastr.js' %}"></script>
+{% endblock %}
+<!-- END: Page JS-->

@@ -1,0 +1,70 @@
+{% load static %}
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="{% url 'manager:home' %}">
+                    <div>
+                        <img src="{% static 'app-assets/images/logo/vuesax-logo.png' %}"
+                            alt="Grapefruit slice atop a pile of other slices">
+                    </div>
+                    <h2 class="brand-text mb-0">Syndic</h2>
+                </a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                        class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i
+                        class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary"
+                        data-ticon="icon-disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="{% if "home" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:home' %}"><i class="feather icon-home"></i><span
+                        class="menu-title" data-i18n="Dashboard">Dashboard</span><span
+                        class="badge badge badge-warning badge-pill float-right mr-2">2</span></a>
+
+            </li>
+            <li class="{% if "calendrier" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:calendrier' %}"><i class="feather icon-mail"></i><span
+                        class="menu-title" data-i18n="Email">Calendrier</span></a>
+            </li>
+            <li class="{% if "nouveauClient" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:nouveauClient' %}"><i class="feather icon-message-square"></i><span
+                        class="menu-title" data-i18n="Chat">Gestion des Clients</span></a>
+            </li>
+            <li class="{% if "NewClient" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:newClient1' %}"><i class="feather icon-message-square"></i><span
+                        class="menu-title" data-i18n="Chat">Nouveaux clients</span></a>
+            </li>
+            <li class="{% if "email" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:email' %}"><i class="feather icon-check-square"></i><span
+                        class="menu-title" data-i18n="Todo">Messagerie</span></a>
+            </li>
+            <li class="{% if "facture" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:calendrier' %}"><i class="feather icon-calendar"></i><span
+                        class="menu-title" data-i18n="Calender">Blog site</span></a>
+            </li>
+            <li class="{% if "contact" in request.get_full_path  %}
+                active
+            {% endif %} nav-item"><a href="{% url 'manager:calendrier' %}"><i class="feather icon-calendar"></i><span
+                        class="menu-title" data-i18n="Calender">Liste des Contacts</span></a>
+            </li>
+            {% comment %} 
+            <li class=" nav-item"><a href="#"><i class="feather icon-list"></i><span class="menu-title"
+                        data-i18n="Data List">New Client</span></a>
+                <ul class="menu-content">
+                    <li><a href="{% url 'manager:newClient1' %}"><i class="feather icon-circle"></i><span
+                                class="menu-item" data-i18n="List View">View New Client</span></a>
+                    </li>
+                </ul>
+            </li>
+            {% endcomment %}
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,251 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/charts/apexcharts.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/tether-theme-arrows.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/tether.min.css' %}">
+<link rel="stylesheet" type="text/css"
+    href="{% static 'app-assets/vendors/css/extensions/shepherd-theme-default.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/dashboard-analytics.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/card-analytics.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/tour/tour.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "commercial/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+    {% include "commercial/components/Header.html" %}
+    <div class="content-wrapper">
+        <div class="content-header row">
+        </div>
+        <div class="content-body">
+            <!-- Dashboard Analytics Start -->
+            <section id="dashboard-analytics">
+                
+                <div class="row match-height">
+                    <div class="col-lg-4 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between pb-0">
+                                <h4>Product Orders</h4>
+                                <div class="dropdown chart-dropdown">
+                                    <button class="btn btn-sm border-0 dropdown-toggle p-0" type="button"
+                                        id="dropdownItem2" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        Last 7 Days
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem2">
+                                        <a class="dropdown-item" href="#">Last 28 Days</a>
+                                        <a class="dropdown-item" href="#">Last Month</a>
+                                        <a class="dropdown-item" href="#">Last Year</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div id="product-order-chart" class="mb-3"></div>
+                                    <div class="chart-info d-flex justify-content-between mb-1">
+                                        <div class="series-info d-flex align-items-center">
+                                            <i class="fa fa-circle-o text-bold-700 text-primary"></i>
+                                            <span class="text-bold-600 ml-50">Ajoutés</span>
+                                        </div>
+                                        <div class="product-result">
+                                            <span>23043</span>
+                                        </div>
+                                    </div>
+                                    <div class="chart-info d-flex justify-content-between mb-1">
+                                        <div class="series-info d-flex align-items-center">
+                                            <i class="fa fa-circle-o text-bold-700 text-warning"></i>
+                                            <span class="text-bold-600 ml-50">En cours</span>
+                                        </div>
+                                        <div class="product-result">
+                                            <span>14658</span>
+                                        </div>
+                                    </div>
+                                    <div class="chart-info d-flex justify-content-between mb-75">
+                                        <div class="series-info d-flex align-items-center">
+                                            <i class="fa fa-circle-o text-bold-700 text-danger"></i>
+                                            <span class="text-bold-600 ml-50">Annulés</span>
+                                        </div>
+                                        <div class="product-result">
+                                            <span>4758</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4 class="card-title">Sales Stats</h4>
+                                    <p class="text-muted mt-25 mb-0">Last 6 months</p>
+                                </div>
+                                <p class="mb-0"><i
+                                        class="feather icon-more-vertical font-medium-3 text-muted cursor-pointer"></i>
+                                </p>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body px-0">
+                                    <div id="sales-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Activity Timeline</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <ul class="activity-timeline timeline-left list-unstyled">
+                                        <li>
+                                            <div class="timeline-icon bg-primary">
+                                                <i class="feather icon-plus font-medium-2 align-middle"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold mb-0">Client Meeting</p>
+                                                <span class="font-small-3">Bonbon macaroon jelly beans gummi bears jelly
+                                                    lollipop apple</span>
+                                            </div>
+                                            <small class="text-muted">25 mins ago</small>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-icon bg-warning">
+                                                <i class="feather icon-alert-circle font-medium-2 align-middle"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold mb-0">Email Newsletter</p>
+                                                <span class="font-small-3">Cupcake gummi bears soufflé caramels
+                                                    candy</span>
+                                            </div>
+                                            <small class="text-muted">15 days ago</small>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-icon bg-danger">
+                                                <i class="feather icon-check font-medium-2 align-middle"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold mb-0">Plan Webinar</p>
+                                                <span class="font-small-3">Candy ice cream cake. Halvah gummi
+                                                    bears</span>
+                                            </div>
+                                            <small class="text-muted">20 days ago</small>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-icon bg-success">
+                                                <i class="feather icon-check font-medium-2 align-middle"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold mb-0">Launch Website</p>
+                                                <span class="font-small-3">Candy ice cream cake. </span>
+                                            </div>
+                                            <small class="text-muted">25 days ago</small>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-icon bg-primary">
+                                                <i class="feather icon-check font-medium-2 align-middle"></i>
+                                            </div>
+                                            <div class="timeline-info">
+                                                <p class="font-weight-bold mb-0">Marketing</p>
+                                                <span class="font-small-3">Candy ice cream. Halvah bears Cupcake gummi
+                                                    bears.</span>
+                                            </div>
+                                            <small class="text-muted">28 days ago</small>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Dashboard Analytics end -->
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+<!-- BEGIN: Footer-->
+{% block Footer %}
+<footer class="footer footer-static footer-light">
+    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT
+            &copy; 2019<a class="text-bold-800 grey darken-2"
+                href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">Pixinvent,</a>All
+            rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                class="feather icon-heart pink"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+    </p>
+</footer>
+{% endblock %}
+<!-- END: Footer-->
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/charts/apexcharts.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/extensions/tether.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/extensions/shepherd.min.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/pages/dashboard-analytics.js' %}"></script>
+{% endblock %}
+
+
+<!-- END: Page JS-->

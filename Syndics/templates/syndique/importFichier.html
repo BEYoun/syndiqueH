@@ -1,0 +1,235 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/ui/prism.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/file-uploaders/dropzone.min.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components-syndique.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/file-uploaders/dropzone.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "syndique/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static " data-open="click"
+data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+    {% include "syndique/components/Header.html" %}
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">File Uploader</h2>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Extensions</a>
+                                </li>
+                                <li class="breadcrumb-item active">File Uploader
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                <div class="form-group breadcrum-right">
+                    <div class="dropdown">
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                class="feather icon-settings"></i></button>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a
+                                class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <!-- Dropzone section start -->
+            <section id="dropzone-examples">
+
+
+                
+                <!-- remove thumbnail file upload starts -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Remove Thumbnail</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <p class="card-text">This example allows user to remove any file out of all uploaded
+                                        files. This will add a
+                                        link to every file preview to remove or cancel (if already uploading) the file.
+                                        The
+                                        <code>dictCancelUpload</code>, <code>dictCancelUploadConfirmation</code> and
+                                        <code>dictRemoveFile</code>
+                                        options are used for the wording.</p>
+                                    <form method="POST" enctype="multipart/form-data" action="{% url 'syndique:importFichier' batiment.id %}" class="dropzone dropzone-area" id="dpz-remove-thumb">
+                                        {% csrf_token %}
+                                        <div class="dz-message">Drop Files Here To Upload</div>
+                                        <input type="submit" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- remove thumbnail file upload ends -->
+
+
+                <!-- file upload tips starts -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Tips</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-1">If you do not want the default message at all (»Drop files to
+                                            upload (or click)«), you can put an element inside your dropzone element
+                                            with the class <code>dz-message</code> and dropzone will not create the
+                                            message for you.</li>
+
+                                        <li class="mb-1">Dropzone will submit any hidden fields you have in your
+                                            dropzone form. So this is an easy way to submit additional data. You can
+                                            also use the <code>params</code> option.
+                                        </li>
+
+                                        <li class="mb-1">Dropzone adds data to the <code>file</code> object you can use
+                                            when events fire. You can access <code>file.width</code> and
+                                            <code>file.height</code> if it’s an image, as
+                                            well as <code>file.upload</code> which is an object containing:
+                                            <code>progress</code> (0-100), <code>total</code> (the total bytes) and
+                                            <code>bytesSent</code>.</li>
+
+                                        <li>If you want to add additional data to the file upload that has to be
+                                            specific for each file, you can register for the <code>sending</code> event:
+                                            <pre class="language-javascript">
+                                    <code class="language-javascript">
+                                        myDropzone.on("sending", function(file, xhr, formData) {
+                                            // Will send the filesize along with the file as POST data.
+                                            formData.append("filesize", file.size);
+                                        });
+                                    </code>
+                                </pre>
+                                        </li>
+
+                                        <li>To access the preview html of a file, you can access
+                                            <code>file.previewElement</code>. For example:
+                                            <pre class="language-javascript">
+                                    <code class="language-javascript">
+                                        myDropzone.on("addedfile", function(file) {
+                                            file.previewElement.addEventListener("click", function() {
+                                                myDropzone.removeFile(file);
+                                            });
+                                        });
+                                    </code>
+                                </pre>
+                                        </li>
+
+                                        <li>If you want the whole body to be a Dropzone and display the files somewhere
+                                            else you can simply instantiate a Dropzone object for the body, and define
+                                            the <code>previewsContainer</code> option. The
+                                            <code>previewsContainer</code> should have the
+                                            <code>dropzone-previews</code> or <code>dropzone</code> class to properly
+                                            display the file previews.
+                                            <pre class="language-javascript">
+                                    <code class="language-javascript">
+                                        new Dropzone(document.body, {
+                                            previewsContainer: ".dropzone-previews",
+                                            // You probably don't want the whole body
+                                            // to be clickable to select files
+                                            clickable: false
+                                        });
+                                    </code>
+                                </pre>
+                                        </li>
+
+                                        <li>Look at the <a href="https://www.dropzonejs.com/" target="_blank">here</a>
+                                            for more examples.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- file upload tips ends -->
+            </section>
+            <!-- // Dropzone section end -->
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+<script src="{% static 'app-assets/vendors/js/extensions/dropzone.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/ui/prism.min.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/extensions/dropzone.js' %}"></script>
+{% endblock %}
+
+
+<!-- END: Page JS-->
