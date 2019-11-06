@@ -2805,7 +2805,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-align: center;
   background-color: #f9f9ff;
   padding: 40px 20px;
-  margin-right: 25px;
+  border-style: solid;
 }
 
 .price-area .single-price .package-no {
