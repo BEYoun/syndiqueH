@@ -595,21 +595,21 @@ pre code {
   margin-left: auto;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .container {
-    max-width: 540px;
+    max-width: 100%;
   }
 }
 
 @media (min-width: 768px) {
   .container {
-    max-width: 720px;
+    max-width: 100%;
   }
 }
 
 @media (min-width: 992px) {
   .container {
-    max-width: 960px;
+    max-width: 100%;
   }
 }
 
@@ -834,7 +834,7 @@ pre code {
   margin-left: 91.66667%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .col-sm {
     flex-basis: 0;
     flex-grow: 1;
@@ -2087,7 +2087,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   width: 100%;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .form-inline label {
     display: flex;
     align-items: center;
@@ -3655,7 +3655,7 @@ tbody.collapse.show {
   }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .navbar-expand-sm {
     flex-flow: row nowrap;
     justify-content: flex-start;
@@ -4092,7 +4092,7 @@ tbody.collapse.show {
   margin-bottom: 15px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .card-deck {
     flex-flow: row wrap;
     margin-right: -15px;
@@ -4117,7 +4117,7 @@ tbody.collapse.show {
   margin-bottom: 15px;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .card-group {
     flex-flow: row wrap;
   }
@@ -4181,7 +4181,7 @@ tbody.collapse.show {
   margin-bottom: 0.75rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .card-columns {
     column-count: 3;
     column-gap: 1.25rem;
@@ -4437,7 +4437,7 @@ tbody.collapse.show {
   border-radius: 0.3rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .jumbotron {
     padding: 4rem 2rem;
   }
@@ -4989,7 +4989,7 @@ button.close {
   overflow: scroll;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .modal-dialog {
     max-width: 500px;
     margin: 1.75rem auto;
@@ -5732,7 +5732,7 @@ button.bg-dark:focus {
   display: inline-flex !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .d-sm-none {
     display: none !important;
   }
@@ -6041,7 +6041,7 @@ button.bg-dark:focus {
   align-self: stretch !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .flex-sm-row {
     flex-direction: row !important;
   }
@@ -6413,7 +6413,7 @@ button.bg-dark:focus {
   float: none !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .float-sm-left {
     float: left !important;
   }
@@ -6879,7 +6879,7 @@ button.bg-dark:focus {
   margin-left: auto !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .m-sm-0 {
     margin: 0 !important;
   }
@@ -7905,7 +7905,7 @@ button.bg-dark:focus {
   text-align: center !important;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 500px) {
   .text-sm-left {
     text-align: left !important;
   }
