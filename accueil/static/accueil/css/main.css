@@ -2350,6 +2350,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   transition: all 0.3s ease 0s;
   cursor: pointer;
   position: relative;
+  border-radius: 20px;
 }
 
 .primary-btn:focus {
@@ -2524,6 +2525,10 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 .home-about-right .primary-btn:hover {
   box-shadow: 0px 20px 20px 0px rgba(132, 144, 255, 0.3);
+}
+.home-about {
+  margin: 25px 0 40px 0;
+  height: 300px !important;
 }
 
 /*-------- End home-about Area ------------*/
@@ -4121,7 +4126,9 @@ dl.accordion.time-line:before {
 .comments-area .comment {
   color: #777777;
 }
-
+.btn-primary {
+  border-radius: 20px;
+}
 .comments-area .btn-reply {
   background-color: #fff;
   color: #222;

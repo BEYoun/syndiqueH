@@ -36,7 +36,7 @@
 	</head>
 
 	<body>
-		{% if messages %}
+	{% if messages %}
                                         
 		<script type="text/javascript" src="https://code.jquery.com/jquery-1.8.2.js"></script>
 		<style type="text/css">
@@ -141,7 +141,7 @@
 			</div>
 		</div>
 		
-		{% endif %}
+	{% endif %}
 		{% include "accueil/components/header.html" %}
 		<!-- start banner Area -->
 		<section class="banner-area">
@@ -174,18 +174,13 @@
 					</div>
 				</div>
 				<div class="row align-items-center justify-content-between">
-					<div class="col-lg-6 col-md-6 home-about-right">
+					<div class="col-lg-12 col-md-12 text-center home-about">
 						<h3>C'est quoi Syndic?</h3>
 						<p>Syndic est une plateforme qui vous permet la mise en place de plusieurs solutions afin de gérer
 							aux mieux votre flotte immobilière.</p>
 						<p>En se connectant à la plateforme Syndic, vous découvrez un tableau de bord conçu pour vous
 							rendre plus efficace dans vos tâches quotidiennes. En un clin d’oeil, vous obtenez les
 							informations principales de votre parc immobilier ou de votre résidence.</p>
-					</div>
-					<div class="col-lg- col-md-6 home-about-left text-center">
-						<div class="col-lg-12" style="margin-bottom:10px;">
-							<img class="img-fluid" src="{% static 'accueil/img/about-img.jpg' %}" alt="">
-						</div>
 						<div class="col-lg-12 ">
 							<a href="{% url 'accounts:login' %}" class="primary-btn text-uppercase">En savoir plus...</a>
 						</div>
@@ -216,7 +211,7 @@
 							<a href="#">
 								<h4>Habitant</h4>
 							</a>
-							<p style="height:273px">
+							<p style="height:200px">
 								Vous êtes habitant? Soyez le premier à faire partie de la communauté Syndic et profitez de
 								50% de remises sur vos services
 							</p>
@@ -309,7 +304,7 @@
 							<a href="#">
 								<h4>Gestionnaire</h4>
 							</a>
-							<p>
+							<p style="height:200px">
 								Si vous êtes gestionnaire, nous vous invitons à contacter un de nos conseillers et
 								bénéficier des offres valables pour faciliter vos actions de gestion.
 							</p>
@@ -328,7 +323,7 @@
 							<a href="#">
 								<h4>Syndique</h4>
 							</a>
-							<p>
+							<p style="height:200px">
 								Vous pensez que Syndic peut subvenir à vos besoin? Nous sommes à votre écoute, et nos
 								équipes aussi pour vous délivrer le meilleur des solutions.
 							</p>
@@ -601,14 +596,18 @@
 					<div class="col-lg-12 col-md-6 banner-left text-center">
 						<h1 style="color:#fff;">Testez nos solutions</h1>
 						<div>
-							<p class="text-left" style="padding:20px;color:white;">
+							<p class="text-center" style="padding:20px;color:white;">
 								Aujourd'hui est le grand jour pour construiure votres parc digital et gérer votre quartier
 								de résidence à votre goût. Partagez votre vision sur la copropriété du futur.
 							</p>
-							<a href="{% url 'accounts:login' %}" style="background-color:#233B79;"
+							<div class="col-lg-12">
+							<a href="{% url 'accounts:login' %}" style="background-color:#233B79;margin-bottom:10px;"
 								class="primary-btn text-uppercase">Rejoindre notre test client</a>
+							</div>
+							<div class="col-lg-12">
 							<a href="{% url 'accounts:login' %}" class="primary-btn text-uppercase">Rejoindre notre
 								communauté</a>
+								</div>
 						</div>
 					</div>
 				</div>
