@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Accounts.models import newAcc
 from django.conf import settings
 from utils.function import sendMail
@@ -27,16 +27,21 @@ def newC(request):
     print(request.user)
     return render(request, 'manager/Client.html', {'users':users})
 def viewNewAcc(request,id_syndique):
-    user = User.objects.get(pk=id_syndique)
-    if request.method == "POST":
-        user.is_active=True
-        user.save()
+    user = newAcc.objects.get(pk=id_syndique)
+    try:
         subject = "incription plateform"
         from_email = settings.EMAIL_HOST_USER
         to_email = []
         to_email.append(user.email)
-        signup_message = """ Bonjour Mr {0},\n \n Vos information on etez validé, vueillez remplir le formulaire suivant concernant les information sur votre batiment : 
-        \thttp://127.0.0.1:8000/accounts/infoBati/{1}
-        """.format(user.last_name,user.id)
+        print("fhie")
+        signup_message = """ Bonjour Mr {0},\n \n Merci pour votre inscritpion, vueillez remplir le formulaire suivant pour demarer votre inscription : 
+        \thttp://127.0.0.1:8000/accounts/creationSyndique/{1}
+        """.format(user.nom,user.id)
         sendMail(subject=subject,from_email=from_email,to_email=to_email,signup_message=signup_message)
-    return render(request, 'manager/viewNewAcc.html', {'user':user})
+    except:
+        messages.error(request, "duplicate email.")
+        print("fhie3")
+    # new = newAcc.objects.create(nom=request.POST.get('nom'),prenom=request.POST.get('prenom'),email=request.POST.get('email'),address=request.POST.get('address'),ville=request.POST.get('ville'),quartier=request.POST.get('quartier'))
+    # # print(request.POST.get('nom'))
+    # return render(request, 'commercial/importFileInformation.html', {"new":new})
+    return redirect('manager:newClient1')
