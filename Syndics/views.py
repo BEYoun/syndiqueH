@@ -17,7 +17,10 @@ def home(request):
 def email(request):
     batiments = Batiment.objects.all().filter(user=request.user)
     usagers = []
-    emails = Email_recep.objects.all().filter(from_email=request.user)
+    try:
+        emails = Email_recep.objects.all().filter(from_email=request.user)
+    except :
+        emails = None
     for batiment in batiments:
         habitants = Profil.objects.all().filter(batiment=batiment)
         for habitant in habitants:
@@ -85,7 +88,6 @@ def calendrier(request):
         if assembl:
             for x in assembl:
                 assemblees.append(x)
-    print(assemblees)
     return render(request, 'syndique/calendrier.html', {"assemblees":assemblees})
 @login_required(login_url="/accounts/login/")
 def newHabitant(request):

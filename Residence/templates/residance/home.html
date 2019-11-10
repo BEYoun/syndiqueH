@@ -70,57 +70,88 @@ data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sideba
 
         </div>
         <div class="content-body">
-            
+
 
             <!-- Overlay Image and Chat Section Starts -->
             <section id="overlay-image-chat-cards">
 
                 <div class="row">
-                <!-- Draggable cards section start -->
-            <div class="col-6">
-                <h1>Paiements</h1>
-                <p>Visualiser l'état des paiments de vos appartements</p>
-                <section id="draggable-cards">
-                    <div class="row" id="card-drag-area">
-                        {% for appart in apprtements %}
-                        <div class="col-xl-6 col-md-6 col-sm-12">
-                            <div class="card">
-                                <div class="card-header">
-                                {% if appart.user %}
-                                
-                                    <img src="{% static 'house green.svg' %}" alt="un triangle aux trois côtés égaux"
-                                        height="50px" width="50px" />
-                                {% else %}
-                                <img src="{% static 'house red.svg' %}" alt="un triangle aux trois côtés égaux"
-                                        height="50px" width="50px" />
-                                {% endif %}
-                                    <h4 class="card-title">
-                                        {{appart.nom}}
-                                    </h4>
+                    <!-- Draggable cards section start -->
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Cotisation payée pour le mois actuel</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div id="pie-chart" class="mx-auto"></div>
                                 </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                        {% if appart.user %}
-                                        
-                                            Proprietaire : {{appart.user.first_name}} {{appart.user.last_name}}
-                                        {% else %}
-                                        Proprietaire : <code>pas de Proprietaire</code>
-                                        {% endif %}
-                                        </p>
-                                        <div class="modal-info mr-1 mb-1 d-inline-block">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Cotisation payée pour l'année actuel</h4>
+                            </div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div id="pie-chart2" class="mx-auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h1>Information sur les appartements</h1>
+                        <p>Visualisation des appartements de votre résidence</p>
+                        <section id="draggable-cards">
+                            <div class="row" id="card-drag-area">
+                                {% for appart in apprtements %}
+                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            {% if appart.user %}
+
+                                            <img src="{% static 'house green.svg' %}"
+                                                alt="un triangle aux trois côtés égaux" height="50px" width="50px" />
+                                            {% else %}
+                                            <img src="{% static 'house red.svg' %}"
+                                                alt="un triangle aux trois côtés égaux" height="50px" width="50px" />
+                                            {% endif %}
+                                            <h4 class="card-title">
+                                                {{appart.nom}}
+                                            </h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    {% if appart.user %}
+
+                                                    Proprietaire : {{appart.user.first_name}} {{appart.user.last_name}}
+                                                    {% else %}
+                                                    Proprietaire : <code>pas de Proprietaire</code>
+                                                    {% endif %}
+                                                </p>
+                                                <div class="modal-info mr-1 mb-1 d-inline-block">
                                                     <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#info{{appart.id}}">
+                                                    <button type="button" class="btn btn-outline-info"
+                                                        data-toggle="modal" data-target="#info{{appart.id}}">
                                                         plus d'information
                                                     </button>
 
                                                     <!-- Modal -->
-                                                    <div class="modal fade text-left" id="info{{appart.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel130" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                    <div class="modal fade text-left" id="info{{appart.id}}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                            role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header bg-info white">
-                                                                    <h5 class="modal-title" id="myModalLabel130">information sur l'appartement {{appart.nom}}</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <h5 class="modal-title" id="myModalLabel130">
+                                                                        information sur l'appartement {{appart.nom}}
+                                                                    </h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
@@ -128,21 +159,22 @@ data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sideba
                                                                     {{appart.nom}}
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Fermer</button>
+                                                                    <button type="button" class="btn btn-info"
+                                                                        data-dismiss="modal">Fermer</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                        </div>
-                        {% endfor %}
+                        </section>
                     </div>
-                </section>
-            </div>
-            <!-- // Draggable cards section end -->
+                    <!-- // Draggable cards section end -->
                     <div class="col-lg-6 col-sm-12">
                         <div class="card">
                             <div class="card-header">
@@ -195,14 +227,6 @@ data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sideba
                                     <div id="donut-chart" class="mx-auto"></div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <ul>
-                                    <li><code>series-1</code> equivaut a : <code>bleu</code></li>
-                                    <li><code>series-2</code> equivaut a : <code>rouge</code></li>
-                                    <li><code>series-3</code> equivaut a : <code>vert</code></li>
-                                    <li><code>series-4</code> equivaut a : <code>orange</code></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
@@ -213,7 +237,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sideba
                                 <div class="col-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4 class="card-title">Detail des paiments de vos residants</h4>
+                                            <h4 class="card-title">Detail des paiements de vos residants</h4>
                                         </div>
                                         <div class="card-content">
                                             <div class="card-body card-dashboard">
@@ -301,12 +325,138 @@ data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sideba
 
 <!-- BEGIN: Page JS-->
 {% block PageJS %}
+<script>
+    /*=========================================================================================
+    File Name: chart-apex.js
+    Description: Apexchart Examples
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuesax HTML Admin Template
+    Version: 1.1
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+    $(document).ready(function () {
+
+        var $primary = '#7367F0',
+            $success = '#28C76F',
+            $danger = '#EA5455',
+            $warning = '#FF9F43',
+            $info = '#00cfe8',
+            $label_color_light = '#dae1e7';
+
+        var themeColors = [$primary, $success, $danger, $warning, $info];
+
+        // Pie Chart
+        // -----------------------------
+        var pieChartOptions = {
+            chart: {
+                type: 'pie',
+                height: 350
+            },
+            colors: themeColors,
+            labels: ['Cotisation payée', 'Cotisation non payée'],
+            series: [175, 175],
+            legend: {
+                itemMargin: {
+                    horizontal: 2
+                },
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 350
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+        var pieChart = new ApexCharts(
+            document.querySelector("#pie-chart"),
+            pieChartOptions
+        );
+        pieChart.render();
+
+        // Pie Chart
+        // -----------------------------
+        var pieChartOptions = {
+            chart: {
+                type: 'pie',
+                height: 350
+            },
+            colors: themeColors,
+            labels: ['Cotisation payée', 'Cotisation non payée'],
+            series: [175, 175],
+            legend: {
+                itemMargin: {
+                    horizontal: 2
+                },
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 350
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+        var pieChart = new ApexCharts(
+            document.querySelector("#pie-chart2"),
+            pieChartOptions
+        );
+        pieChart.render();
+
+        // Donut Chart
+        // -----------------------------
+        var donutChartOptions = {
+            chart: {
+                type: 'donut',
+                height: 350
+            },
+            colors: themeColors,
+            series: [44, 55, 41, 17],
+            labels: ['bleu', 'rouge', 'vert', 'noir' ],
+            legend: {
+                itemMargin: {
+                    horizontal: 2
+                },
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 350
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+        var donutChart = new ApexCharts(
+            document.querySelector("#donut-chart"),
+            donutChartOptions
+        );
+
+        donutChart.render();
+
+
+
+    });
+</script>
 <script src="{% static 'app-assets/js/scripts/pages/app-chat.js' %}"></script>
-<script src="{% static 'app-assets/js/scripts/charts/chart-apex.js' %}"></script>
+{% comment %} <script src="{% static 'app-assets/js/scripts/charts/chart-apex.js' %}"></script> {% endcomment %}
 
 <script src="{% static 'app-assets/js/scripts/datatables/datatable.js' %}"></script>
 <script src="{% static 'app-assets/js/scripts/extensions/drag-drop.js' %}"></script>
-    <script src="{% static 'app-assets/js/scripts/modal/components-modal.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/modal/components-modal.js' %}"></script>
 {% endblock %}
 
 
