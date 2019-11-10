@@ -84,7 +84,10 @@ def calendrier(request):
     batiments = Batiment.objects.all().filter(user=request.user)
     assemblees = []
     for batiment in batiments:
-        assembl = assemblee.objects.all().filter(batiment=batiment)
+        try:
+            assembl = assemblee.objects.all().filter(batiment=batiment)
+        except:
+            assembl = None
         if assembl:
             for x in assembl:
                 assemblees.append(x)
