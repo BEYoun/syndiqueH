@@ -37,8 +37,6 @@ def email(request):
         em.save()
         em_recep =Email_recep(emails=em,from_email=request.user)
         em_recep.save()
-    
-    print(usagers)
     return render(request, 'habitant/email.html', {"usagers":usagers,"emails":emails})
 @login_required(login_url="/accounts/login/")
 def todo(request):
@@ -51,7 +49,6 @@ def calendrier(request):
     bat = Batiment.objects.get(pk=request.user.profil.batiment.id)
     try:
         events = evenement.objects.all().filter(batiment=bat)
-        print(events)
     except:
         events = None
     return render(request, 'habitant/calendrier.html', {'evenements':events})
@@ -63,7 +60,6 @@ def AlerteIncident(request):
             batiment=bat)
     try:
         alertes = alerte.objects.all().filter(batiment=bat)
-        print(alertes)
     except:
         alertes = None
     if request.POST:
@@ -90,9 +86,7 @@ def cotisation(request):
     user=request.user
     bat = request.user.profil.batiment
     cotisations = cotisationValidation.objects.all().filter(user=user)
-    print(cotisations)
     if request.method == 'POST':
-        print(request.POST)
         tab = request.POST.get('date').split(",")
         tab[0]=mois[tab[0]]
         cotisationValidation(nom=request.user.last_name,
@@ -106,10 +100,9 @@ def cotisation(request):
 @login_required(login_url="/accounts/login/")
 def sondagex(request):
     bat = Batiment.objects.get(pk=request.user.profil.batiment.id)
-    print(bat.id)
     sondages= sondage.objects.all().filter(batiment=bat)
     try:
-        print(sondages)
+        pass
     except :
         sondages=None
     return render(request, 'habitant/sondage.html', locals())
@@ -122,14 +115,12 @@ def viewSondage(request,id_sondage):
 @login_required(login_url="/accounts/login/")
 def vote(request,id_comm,id_sondage):
     viewS= sondage.objects.get(pk=id_sondage)
-    
     comm= reponseSondage.objects.get(pk=id_comm)
     try:
         user = request.user.profil
         vote.objects.all().filter(sondage=viewS)
     except:
         user = request.user.profil
-        print(user)
         # v=vote(sondage=viewS,user=user)
         # v.save()
         comm.nombreVote=comm.nombreVote+1

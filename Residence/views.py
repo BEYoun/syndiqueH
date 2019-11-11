@@ -154,7 +154,6 @@ def newHabitant(request,id_batiment):
 
     else:
         users = User.objects.all()
-        print(request.user)
     return render(request, 'residance/newAcc.html', {'users':users,'batiment':bat,'id_batiment':id_batiment,'appartements':apparts})
 
 @login_required(login_url="/accounts/login/")

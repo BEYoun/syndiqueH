@@ -1,0 +1,255 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/pickers/pickadate/pickadate.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/app-todo.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "residance/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern content-left-sidebar todo-application navbar-floating footer-static "
+data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar"
+{% endblock %}
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+
+    {% include "residance/components/Header.html" %}
+
+    <div class="content-area-wrapper">
+        <div class="sidebar-left">
+            <div class="sidebar">
+                <div class="sidebar-content todo-sidebar d-flex">
+                    <span class="sidebar-close-icon">
+                        <i class="feather icon-x"></i>
+                    </span>
+                    <div class="todo-app-menu">
+                        <div class="form-group text-center add-task">
+                            <button type="button" class="btn btn-primary btn-block my-1" data-toggle="modal"
+                                data-target="#addTaskModal">Ajouter une assemblée</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm" role="document">
+                        <div class="modal-content">
+                            <section class="todo-form">
+
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Ajout Assemblee</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form method="POST" action="{% url 'residance:todo' id_batiment %}">
+                                        {% csrf_token %}
+                                        <fieldset class="form-group">
+                                            <input type="text" class="new-todo-item-title form-control"
+                                                placeholder="Title" name="Titre">
+                                        </fieldset>
+                                        <input type='text' class="form-control format-picker" name ="date"/>
+                                        <fieldset class="form-group">
+                                            <select class="form-control" id="basicSelect" name="type">
+                                                <option value="AGO">Assemblee géneral Ordinaire</option>
+                                                <option value="AG">Assemblee géneral </option>
+                                                <option value="AGE">Assemblee géneral Extraordinaire</option>
+                                            </select>
+                                        </fieldset>
+                                        <fieldset class="form-group">
+                                            <textarea class="new-todo-item-desc form-control" rows="3"
+                                                placeholder="Ajouter une description" name="description"></textarea>
+                                        </fieldset>
+                                        <input type="submit" class="btn btn-primary" value="Ajouter">
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                    <fieldset class="form-group position-relative has-icon-left mb-0">
+                                        <button type="button" class="btn btn-outline-light" data-dismiss="modal"><i
+                                                class="feather icon-x d-block d-lg-none"></i>
+                                            <span class="d-none d-lg-block">Annuler</span></button>
+                                    </fieldset>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="content-right">
+            <div class="content-wrapper">
+                <div class="content-header row">
+                </div>
+                <div class="content-body">
+                    <div class="app-content-overlay"></div>
+                    <div class="todo-app-area">
+                        <div class="todo-app-list-wrapper">
+                            <div class="todo-app-list">
+                                <div class="app-fixed-search">
+                                    <div class="sidebar-toggle d-block d-lg-none"><i class="feather icon-menu"></i>
+                                    </div>
+                                    <fieldset class="form-group position-relative has-icon-left m-0">
+                                        <input type="text" class="form-control" id="todo-search" placeholder="Search..">
+                                        <div class="form-control-position">
+                                            <i class="feather icon-search"></i>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="todo-task-list list-group">
+                                    <ul class="todo-task-list-wrapper media-list">
+                                    {% for assemblee in assemblees %}
+                                        <li class="todo-item" data-toggle="modal" data-target="#editTaskModal">
+                                            <div class="todo-title-wrapper d-flex justify-content-between mb-50">
+                                                <div class="todo-title-area d-flex align-items-center">
+                                                    <div class="title-wrapper d-flex">
+                                                        <div class="vs-checkbox-con">
+                                                            <input type="checkbox">
+                                                            <span class="vs-checkbox vs-checkbox-sm">
+                                                                <span class="vs-checkbox--check">
+                                                                    <i class="vs-icon feather icon-check"></i>
+                                                                </span>
+                                                            </span>
+                                                        </div>
+                                                        <h5 class="todo-title mt-50 mx-50">{{assemblee.titre}}  prevue le {{assemblee.date}}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p class="todo-desc truncate mb-0">{{assemblee.description}} </p>
+                                            <a href="{% url 'residance:detailAssemblee' id_batiment assemblee.id %}"><button type="button" class="btn btn-primary update-todo-item"
+                                                    data-dismiss="modal"><i
+                                                        class="feather icon-edit d-block d-lg-none"></i>
+                                                    <span class="d-none d-lg-block">Voir les details de assemblée</span></button></div></a>
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                    <div class="no-results">
+                                        <h5>No Items Found</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog"
+                        aria-labelledby="editTodoTask" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"
+                            role="document">
+                            <div class="modal-content">
+                                <section class="todo-form">
+                                    <form id="form-edit-todo" class="todo-input">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editTodoTask">Visualisation Assemblee</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <fieldset class="form-group">
+                                                <input type="text" class="edit-todo-item-title form-control"
+                                                    placeholder="Title">
+                                            </fieldset>
+                                            <fieldset class="form-group">
+                                                <textarea class="edit-todo-item-desc form-control" rows="3"
+                                                    placeholder="Add description"></textarea>
+                                            </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <fieldset class="form-group position-relative has-icon-left mb-0">
+                                                <button type="button" class="btn btn-primary update-todo-item"
+                                                    data-dismiss="modal"><i
+                                                        class="feather icon-edit d-block d-lg-none"></i>
+                                                    <span class="d-none d-lg-block">Voir L'assemble</span></button>
+                                            </fieldset>
+                                            <fieldset class="form-group position-relative has-icon-left mb-0">
+                                                <button type="button" class="btn" data-dismiss="modal"><i
+                                                        class="feather icon-x d-block d-lg-none"></i>
+                                                    <span class="d-none d-lg-block">Quiter</span></button>
+                                            </fieldset>
+                                        </div>
+                                    </form>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+
+    <script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.date.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/pickers/pickadate/picker.time.js' %}"></script>
+    <script src="{% static 'app-assets/vendors/js/pickers/pickadate/legacy.js' %}"></script>
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+<script src="{% static 'app-assets/js/scripts/pages/app-todo.js' %}"></script>
+    <script src="{% static 'app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js' %}"></script>
+{% endblock %}
+
+
+<!-- END: Page JS-->
