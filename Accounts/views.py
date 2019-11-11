@@ -85,11 +85,9 @@ def creationHabitant(request,id_compt,id_batiment,id_appartement):
         form = SyndiqueForm(request.POST)
         if form.is_valid():
             user = form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.profil.role = Profil.HABITANTP
             app.user=user
             app.save()
-            user.profil.appartement = app
+            Profil(user=user,role="SY",batiment=bat,appartement=app).save()
             user.save()
             messages.success(request, "Votre compt a bien ete creer vueillez vous connectez")
             # username = form.cleaned_data.get('username')
