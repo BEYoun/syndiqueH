@@ -78,8 +78,3 @@ class newAcc(models.Model):
 
 
 
-@receiver(post_save, sender=User)
-def update_user_profil(sender, instance, created, **kwargs):
-    if created:
-        Profil.objects.create(user=instance)
-    instance.profil.save()

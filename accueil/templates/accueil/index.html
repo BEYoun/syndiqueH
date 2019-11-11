@@ -145,9 +145,9 @@
 		{% include "accueil/components/header.html" %}
 		<!-- start banner Area -->
 		<section class="banner-area">
-			<div class="container">
-				<div class="row fullscreen align-items-center justify-content-between">
-					<div class="col-lg-12 col-md-6 banner-left text-center">
+			<div class="container" style="background-color: rgba(0,0,0,.3);">
+				<div class="row fullscreen align-items-center justify-content-between" >
+					<div class="col-lg-12 col-md-6 banner-left text-center" style="font-size:1.4rem;">
 						<h1 style="color:#fff;">La gestion immobilière réinventée</h1>
 						<p style="color:#fff">
 							Gérez votre espace de copropriéte sur le bout des doigt
@@ -173,14 +173,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="row align-items-center justify-content-between">
+				<div class="row align-items-center">
 					<div class="col-lg-12 col-md-12 text-center home-about">
-						<h3>C'est quoi Syndic?</h3>
+						<h3>C'est quoi Syndic?</h3><br/><br/>
 						<p>Syndic est une plateforme qui vous permet la mise en place de plusieurs solutions afin de gérer
 							aux mieux votre flotte immobilière.</p>
 						<p>En se connectant à la plateforme Syndic, vous découvrez un tableau de bord conçu pour vous
 							rendre plus efficace dans vos tâches quotidiennes. En un clin d’oeil, vous obtenez les
-							informations principales de votre parc immobilier ou de votre résidence.</p>
+							informations principales de votre parc immobilier ou de votre résidence.</p><br/>
 						<div class="col-lg-12 ">
 							<a href="{% url 'accounts:login' %}" class="primary-btn text-uppercase">En savoir plus...</a>
 						</div>

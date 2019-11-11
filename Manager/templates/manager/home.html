@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/tether.min.css' %}">
 <link rel="stylesheet" type="text/css"
     href="{% static 'app-assets/vendors/css/extensions/shepherd-theme-default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/extensions/dragula.min.css' %}">
 {% endblock %}
 <!-- END: Vendor CSS-->
 
@@ -29,6 +30,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/dashboard-analytics.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/pages/card-analytics.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/tour/tour-manager.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/extensions/drag-and-drop.css' %}">
 {% endblock %}
 <!-- END: Page CSS-->
 
@@ -59,79 +61,80 @@ class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-st
             <section id="dashboard-analytics">
                 
                 <div class="row match-height">
-                    <div class="col-lg-4 col-12">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between pb-0">
-                                <h4>Product Orders</h4>
-                                <div class="dropdown chart-dropdown">
-                                    <button class="btn btn-sm border-0 dropdown-toggle p-0" type="button"
-                                        id="dropdownItem2" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                        Last 7 Days
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownItem2">
-                                        <a class="dropdown-item" href="#">Last 28 Days</a>
-                                        <a class="dropdown-item" href="#">Last Month</a>
-                                        <a class="dropdown-item" href="#">Last Year</a>
+                    
+                    <div class="col-lg-12 col-12">
+                        <h1>Information sur les Syndiques</h1>
+                        <p>Detail sur les utilisateurs syndique de votre plateform</p>
+                        <section id="draggable-cards">
+                            <div class="row" id="card-drag-area">
+                                {% for syndique in syndiques %}
+                                <div class="col-xl-6 col-md-6 col-sm-12">
+                                    <div class="card">
+                                        <div class="card-header">
+
+                                            <img src="{% static 'man.svg' %}"
+                                                alt="un triangle aux trois côtés égaux" height="50px" width="50px" />
+                                            <h4 class="card-title">
+                                                Syndique
+                                            </h4>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <p class="card-text">
+
+                                                    Nom et prenom : {{syndique.user.first_name}} {{syndique.user.last_name}}<br />
+                                                    Email : {{syndique.user.email}}</br>
+                                                    Derniere activité : {{syndique.user.last_login}}
+                                                    
+                                                </p>
+                                                <div class="modal-info mr-1 mb-1 d-inline-block">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-outline-info"
+                                                        data-toggle="modal" data-target="#info{{syndique.id}}">
+                                                        plus d'information
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade text-left" id="info{{syndique.id}}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel130"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                            role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header bg-info white">
+                                                                    <h5 class="modal-title" id="myModalLabel130">
+                                                                        information sur l'utilisateur : {{syndique.user.first_name}}
+                                                                    </h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    {{syndique.nom}}
+                                                                    <button type="button" class="btn btn-dark mr-1 mb-1 waves-effect waves-light">Donner le droit "accès gratuit"</button>
+                                                                    <button type="button" class="btn btn-dark mr-1 mb-1 waves-effect waves-light">Retirer le droit "accès gratuit"</button>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-info"
+                                                                        data-dismiss="modal">Fermer</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                            <div class="card-content">
-                                <div class="card-body">
-                                    <div id="product-order-chart" class="mb-3"></div>
-                                    <div class="chart-info d-flex justify-content-between mb-1">
-                                        <div class="series-info d-flex align-items-center">
-                                            <i class="fa fa-circle-o text-bold-700 text-primary"></i>
-                                            <span class="text-bold-600 ml-50">Finished</span>
-                                        </div>
-                                        <div class="product-result">
-                                            <span>23043</span>
-                                        </div>
-                                    </div>
-                                    <div class="chart-info d-flex justify-content-between mb-1">
-                                        <div class="series-info d-flex align-items-center">
-                                            <i class="fa fa-circle-o text-bold-700 text-warning"></i>
-                                            <span class="text-bold-600 ml-50">Pending</span>
-                                        </div>
-                                        <div class="product-result">
-                                            <span>14658</span>
-                                        </div>
-                                    </div>
-                                    <div class="chart-info d-flex justify-content-between mb-75">
-                                        <div class="series-info d-flex align-items-center">
-                                            <i class="fa fa-circle-o text-bold-700 text-danger"></i>
-                                            <span class="text-bold-600 ml-50">Rejected</span>
-                                        </div>
-                                        <div class="product-result">
-                                            <span>4758</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <div class="card">
-                            <div class="card-header d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h4 class="card-title">Sales Stats</h4>
-                                    <p class="text-muted mt-25 mb-0">Last 6 months</p>
-                                </div>
-                                <p class="mb-0"><i
-                                        class="feather icon-more-vertical font-medium-3 text-muted cursor-pointer"></i>
-                                </p>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-body px-0">
-                                    <div id="sales-chart"></div>
-                                </div>
-                            </div>
-                        </div>
+                        </section>
                     </div>
                     <div class="col-lg-4 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Activity Timeline</h4>
+                                <h4 class="card-title">Activité </h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -205,19 +208,6 @@ class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-st
 {% endblock %}
 <!-- END: Content-->
 
-<!-- BEGIN: Footer-->
-{% block Footer %}
-<footer class="footer footer-static footer-light">
-    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT
-            &copy; 2019<a class="text-bold-800 grey darken-2"
-                href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">Pixinvent,</a>All
-            rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
-                class="feather icon-heart pink"></i></span>
-        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
-    </p>
-</footer>
-{% endblock %}
-<!-- END: Footer-->
 
 
 <!-- BEGIN: Vendor JS-->
@@ -231,6 +221,7 @@ class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-st
 <script src="{% static 'app-assets/vendors/js/charts/apexcharts.min.js' %}"></script>
 <script src="{% static 'app-assets/vendors/js/extensions/tether.min.js' %}"></script>
 <script src="{% static 'app-assets/vendors/js/extensions/shepherd.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/extensions/dragula.min.js' %}"></script>
 {% endblock %}
 <!-- END: Page Vendor JS-->
 
@@ -245,6 +236,7 @@ class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-st
 <!-- BEGIN: Page JS-->
 {% block PageJS %}
 <script src="{% static 'app-assets/js/scripts/pages/dashboard-analytics.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/extensions/drag-drop.js' %}"></script>
 {% endblock %}
 
 

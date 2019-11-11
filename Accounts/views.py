@@ -44,13 +44,14 @@ def logout_view(request):
     return redirect('accueil:home')
 
 def signup(request):
+    print(request.POST)
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
             user=form.save()
-            user.refresh_from_db()  # load the profile instance created by the signal
-            user.profil.role = Profil.COMMERCIAL
-            user.save()
+            # user.refresh_from_db()  # load the profile instance created by the signal
+            profil = Profil(user=user,role="MA",batiment=Batiment.objects.get(pk=1),appartement=Appartement.objects.get(pk=1))
+            profil.save()
             return redirect('accounts:login')
     else:
         form = SignUpForm()

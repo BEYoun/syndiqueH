@@ -1,6 +1,6 @@
 {% extends "default/default.html" %}
 {% load static %}
-
+{% block title %}Calendrier{% endblock %}
 <!-- BEGIN: Vendor CSS-->
 {% block VendorCSS %}
 <link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
@@ -165,6 +165,7 @@ class="vertical-layout vertical-menu-modern 2-columns  navbar-floating footer-st
 
     <script src="{% static 'app-assets/vendors/js/extensions/moment.min.js' %}"></script>
     <script src="{% static 'app-assets/vendors/js/calendar/fullcalendar.min.js' %}"></script>
+<script src="{% static 'app-assets/vendors/js/calendar/locales-all.js' %}"></script>
     <script src="{% static 'app-assets/vendors/js/calendar/extensions/daygrid.min.js' %}"></script>
     <script src="{% static 'app-assets/vendors/js/calendar/extensions/timegrid.min.js' %}"></script>
     <script src="{% static 'app-assets/vendors/js/calendar/extensions/interactions.min.js' %}"></script>
@@ -223,6 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var calendarEl = document.getElementById('fc-default');
 
   var calendar = new FullCalendar.Calendar(calendarEl, {
+    locale: "fr",
     plugins: ["dayGrid", "timeGrid", "interaction"],
     customButtons: {
       addNew: {
