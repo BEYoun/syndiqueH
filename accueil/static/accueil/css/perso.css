@@ -94,7 +94,7 @@ path.two {
 .example_b {
     height: 50px;
     margin: -6px;
-    padding: 5px 20px 0 20px !important;
+    padding: 10px 20px 10px 20px !important;
     color: #000 !important;
     text-transform: uppercase;
     text-decoration: none;
