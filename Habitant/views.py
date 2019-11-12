@@ -94,7 +94,7 @@ def cotisation(request):
             date=datetime.datetime.strptime(tab[0]+"-"+tab[1]+"-"+tab[2], "%m- %d- %Y"),
             user=user,
             batiment=bat).save()
-        messages.success(request, "Votre demande de paiement a bien éte envoié et sera traiter par votre syndique le plus vite possible")
+        messages.success(request, "Votre demande de paiement a bien éte envoyée a votre syndique et elle est en cours de traitement.")
 
     return render(request, 'habitant/cotisation.html', {"cotisations":cotisations})
 @login_required(login_url="/accounts/login/")
