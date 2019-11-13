@@ -1,0 +1,228 @@
+{% extends "default/default.html" %}
+{% load static %}
+
+<!-- BEGIN: Vendor CSS-->
+{% block VendorCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/vendors/css/vendors.min.css' %}">
+{% endblock %}
+<!-- END: Vendor CSS-->
+{% block attBody %}
+class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static " data-open="click"
+data-menu="vertical-menu-modern" data-col="2-columns"
+{% endblock %}
+<!-- BEGIN: Theme CSS-->
+{% block ThemeCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/bootstrap-extended.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/colors-manager.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/components-manager.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/dark-layout.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/themes/semi-dark-layout.css' %}">
+{% endblock %}
+<!-- END: Theme CSS-->
+<!-- BEGIN: Page CSS-->
+{% block PageCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/menu/menu-types/vertical-menu.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/core/colors/palette-gradient.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'app-assets/css/plugins/animate/animate.css' %}">
+{% endblock %}
+<!-- END: Page CSS-->
+
+<!-- BEGIN: Custom CSS-->
+{% block CustomCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+{% endblock %}
+<!-- END: Custom CSS-->
+
+
+<!-- BEGIN: Main Menu-->
+{% block MainMenu %}
+{% include "manager/components/MainMenu.html" %}
+{% endblock %}
+<!-- END: Main Menu-->
+
+<!-- BEGIN: Content-->
+{% block Content %}
+<div class="app-content content">
+    {% include "manager/components/Header.html" %}
+
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Collapse</h2>
+                        <div class="breadcrumb-wrapper col-12">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Components</a>
+                                </li>
+                                <li class="breadcrumb-item active">Collapse
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+                <div class="form-group breadcrum-right">
+                    <div class="dropdown">
+                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                                class="feather icon-settings"></i></button>
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a
+                                class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+
+
+            <!-- Accordion with shadow start -->
+            <section id="accordion-with-shadow">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="accordionWrapa10" role="tablist" aria-multiselectable="true">
+                            <div class="card collapse-icon accordion-icon-rotate">
+                                <div class="card-header">
+                                    <h4 class="card-title">Shadow</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p>
+                                            use class <code>.accordion-shadow</code> as a wrapper of your
+                                            accordion/collapse
+                                            <code>card</code> for shadow
+                                        </p>
+                                        <div class="accordion-shadow collapse-bordered">
+                                            <div class="card collapse-header">
+                                                <div id="heading11" class="card-header" data-toggle="collapse"
+                                                    role="button" data-target="#accordion10" aria-expanded="false"
+                                                    aria-controls="accordion10">
+                                                    <span class="lead collapse-title">
+                                                        Information Personnel
+                                                    </span>
+                                                </div>
+                                                <div id="accordion10" role="tabpanel" data-parent="#accordionWrapa10"
+                                                    aria-labelledby="heading11" class="collapse">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <h1>First Name: <small
+                                                                    class="text-muted">{{user.first_name}}</small></h1>
+                                                            <h1>Last Name: <small
+                                                                    class="text-muted">{{user.last_name}}</small></h1>
+                                                            <h1>Email: <small class="text-muted">{{user.email}}</small>
+                                                            </h1>
+                                                            <h1>Role: <small
+                                                                    class="text-muted">{{user.profil.role}}</small></h1>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card collapse-header">
+                                                <div id="heading20" class="card-header" data-toggle="collapse"
+                                                    role="button" data-target="#accordion20" aria-expanded="false"
+                                                    aria-controls="accordion20">
+                                                    <span class="lead collapse-title">
+                                                        Validation du compte
+                                                    </span>
+                                                </div>
+                                                <div id="accordion20" role="tabpanel" data-parent="#accordionWrapa10"
+                                                    aria-labelledby="heading20" class="collapse" aria-expanded="false">
+                                                    <div class="card-content">
+                                                        <div class="card-body">
+                                                            <p>
+                                                                Si vous avez bien verrifiez les informations Cliquez sur
+                                                                valider pour valider le compte
+                                                            </p>
+                                                            <form class="form form-horizontal" method="POST" action="{% url 'manager:viewNewAcc' user.id %}">
+                                                            {% csrf_token %}
+                                                                <div class="form-body">
+                                                                    <div class="row">
+                                                                        <div class="form-group col-md-8 offset-md-4">
+                                                                            <fieldset class="checkbox">
+                                                                                <div
+                                                                                    class="vs-checkbox-con vs-checkbox-primary">
+                                                                                    <input type="checkbox">
+                                                                                    <span class="vs-checkbox">
+                                                                                        <span
+                                                                                            class="vs-checkbox--check">
+                                                                                            <i
+                                                                                                class="vs-icon feather icon-check"></i>
+                                                                                        </span>
+                                                                                    </span>
+                                                                                    <span class="">Code de validation</span>
+                                                                                </div>
+                                                                            </fieldset>
+                                                                        </div>
+                                                                        <div class="col-md-8 offset-md-4">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary mr-1 mb-1 waves-effect waves-light">Valider</button>
+                                                                            <button type="reset"
+                                                                                class="btn btn-outline-warning mr-1 mb-1 waves-effect waves-light">Back</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Accordion with Shadow end -->
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!-- END: Content-->
+
+<!-- BEGIN: Footer-->
+{% block Footer %}
+<footer class="footer footer-static footer-light">
+    <p class="clearfix blue-grey lighten-2 mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT
+            &copy; 2019<a class="text-bold-800 grey darken-2"
+                href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank">Pixinvent,</a>All
+            rights Reserved</span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i
+                class="feather icon-heart pink"></i></span>
+        <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="feather icon-arrow-up"></i></button>
+    </p>
+</footer>
+{% endblock %}
+<!-- END: Footer-->
+
+
+<!-- BEGIN: Vendor JS-->
+{% block VendorJS %}
+<script src="{% static 'app-assets/vendors/js/vendors.min.js' %}"></script>
+{% endblock %}
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{% block PageVendorJS %}
+{% endblock %}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+{% block ThemeJS %}
+<script src="{% static 'app-assets/js/core/app-menu.js' %}"></script>
+<script src="{% static 'app-assets/js/core/app.js' %}"></script>
+<script src="{% static 'app-assets/js/scripts/components.js' %}"></script>
+{% endblock %}
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{% block PageJS %}
+{% endblock %}
+<!-- END: Page JS-->
